@@ -6,19 +6,17 @@
 /*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2022/12/12 18:32:34 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/02/05 16:49:09 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/utils.h"
 
-
-static int	get_col(char *fname)
+int	get_col(char *fname)
 {
 	int		f;
 	char	c;
 	int		i;
-	int		line;
 
 	i = 0;
 	f = open(fname, O_RDONLY);
@@ -29,17 +27,15 @@ static int	get_col(char *fname)
 		while (read(f, &c, 1) > 0)
 		{
 			if (c == '\n')
-			{
-				line = i;
-			}
+				break ;
 			i++;
 		}
 	}
 	close(f);
-	return (line);
+	return (i);
 }
 
-static int	get_row(char *fname)
+int	get_row(char *fname)
 {
 	int		f;
 	char	c;
@@ -73,16 +69,26 @@ char	**read_file(char *fname)
 	int		row;
 	int		i;
 	int		fd;
-
+//	int		test = 0;
 	i = -1;
 	fd = open(fname, O_RDONLY);
+	if (!fd)
+		return (0);
 	col = get_col(fname);
 	row = get_row(fname);
+	printf("Col:%d Row:%d\n", col,row);
 	content = (char **)ft_calloc(row, sizeof(char **));
 	while (++i < row)
 		content[i] = ft_calloc(col, sizeof(char *));
 	i = -1;
 	while (++i < row)
 		content[i] = get_next_line(fd);
+/*
+	while (row--)
+	{
+		printf("%s\n", content[test]);
+		test++;
+	}
+*/
 	return (content);
 }
