@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_mlx_pixel_put.c                                 :+:      :+:    :+:   */
+/*   mlxplus.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:41:59 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/07 14:36:45 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/08 03:17:32 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ void	laferme(t_mlx *mlx)
 
 void	bresenham(t_point p1, t_point p2, t_mlx *mlx)
 {
-	float x_step;
-	float y_step;
-	int max;
+	float	x_step;
+	float	y_step;
+	int		max;
 
 	x_step = p2.x - p1.x;
-	y_step = p2.y - p1.y; 
+	y_step = p2.y - p1.y;
 	max = maxx(my_abs(x_step), my_abs(y_step));
 	x_step /= max;
 	y_step /= max;
 	while ((int)(p1.x - p2.x) && (int)(p1.y - p2.y))
 	{
-		mlx_pixel_put(mlx->mlx, mlx->window, p1.x, p1.y, 0xffffff);
+		my_mlx_pixel_putcolor(mlx->mlx, p1.x, p1.y, 0xffffff);
 		p1.x += x_step;
 		p1.y += y_step;
 	}
@@ -47,15 +47,24 @@ void	bresenham(t_point p1, t_point p2, t_mlx *mlx)
 
 void	rendermap(t_mlx *mlx)
 {
-	int		c;
-	int		r;
-	t_img	img;
+	t_point	p1;
+	t_point p2;
 
-	img.img = mlx_new_image(&img, 540, 440);
-	img.addr = mlx_get_data_addr(&img, &img.bpp, &img.line_len, &img.endian);
-	c = -1;
-	r = 0;
-	
-	while ( ++c <= mlx->COLsizebuff && ++r <= mlx->LINEsizebuff)
-		my_mlx_pixel_putcolor(&img, c, r, 0);
+	p1.x = 0;
+	p1.y = 0;
+	p2.x = 1;
+	p2.y = 0;
+	while (p1.y <= mlx->linesizebuff - 1)
+	{	
+		while (p1.x <= mlx->colsizebuff - 1)
+		{
+			bresenham(p1, p2, mlx);
+			p1.x++;
+			p2.x++;
+		}
+		p1.x = 0;
+		p2.x = 0;
+		p1.y++;
+		p2.y++;
+	}
 }

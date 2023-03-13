@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 12:34:02 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/08 03:29:12 by smagniny         ###   ########.fr       */
+/*   Created: 2022/09/22 16:17:09 by smagniny          #+#    #+#             */
+/*   Updated: 2022/10/04 21:06:44 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "libft.h"
 
-int	my_abs(int x)
-{	
-	if (x > 0)
-		return (x);
-	else
-		return (-x);
-}
-
-int	maxx(int a, int b)
+char	*ft_strrchr(const char *s, int c)
 {
-	if (a > b)
-		return (a);
-	else if (b > a)
-		return (b);
-	else
-		return (a);
-}
+	char	*ret;
+	int		i;
 
-void	doublefree(char	**tmp)
-{
-	int	i;
-
+	ret = NULL;
 	i = 0;
-	if (tmp != NULL)
+	while (s[i])
 	{
-		while (tmp[i])
-			free(tmp[i++]);
+		if ((unsigned char)s[i] == (unsigned char)c)
+			ret = &((char *)s)[i];
+		i++;
 	}
-	free(tmp);
+	if ((unsigned char)c == 0)
+		ret = &((char *)s)[i];
+	return (ret);
 }

@@ -1,44 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 12:34:02 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/08 03:29:12 by smagniny         ###   ########.fr       */
+/*   Created: 2022/10/05 17:44:07 by smagniny          #+#    #+#             */
+/*   Updated: 2022/10/05 18:04:59 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "libft.h"
 
-int	my_abs(int x)
-{	
-	if (x > 0)
-		return (x);
-	else
-		return (-x);
-}
-
-int	maxx(int a, int b)
+int	ft_lstsize(t_list *lst)
 {
-	if (a > b)
-		return (a);
-	else if (b > a)
-		return (b);
-	else
-		return (a);
-}
-
-void	doublefree(char	**tmp)
-{
-	int	i;
+	size_t	i;
+	t_list	*ptr;
 
 	i = 0;
-	if (tmp != NULL)
+	ptr = lst;
+	while (ptr)
 	{
-		while (tmp[i])
-			free(tmp[i++]);
+		ptr = ptr->next;
+		i++;
 	}
-	free(tmp);
+	return (i);
 }

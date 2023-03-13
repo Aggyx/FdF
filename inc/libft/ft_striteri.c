@@ -1,44 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 12:34:02 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/08 03:29:12 by smagniny         ###   ########.fr       */
+/*   Created: 2022/09/28 12:24:32 by smagniny          #+#    #+#             */
+/*   Updated: 2022/10/02 18:18:55 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "libft.h"
 
-int	my_abs(int x)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {	
-	if (x > 0)
-		return (x);
-	else
-		return (-x);
-}
-
-int	maxx(int a, int b)
-{
-	if (a > b)
-		return (a);
-	else if (b > a)
-		return (b);
-	else
-		return (a);
-}
-
-void	doublefree(char	**tmp)
-{
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	if (tmp != NULL)
+	if (s == NULL || f == NULL)
+		return ;
+	while (s[i] && (s != NULL && f != NULL))
 	{
-		while (tmp[i])
-			free(tmp[i++]);
+		f(i, &s[i]);
+		i++;
 	}
-	free(tmp);
 }

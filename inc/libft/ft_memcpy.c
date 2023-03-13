@@ -1,44 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 12:34:02 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/08 03:29:12 by smagniny         ###   ########.fr       */
+/*   Created: 2022/09/13 16:29:03 by smagniny          #+#    #+#             */
+/*   Updated: 2022/10/05 16:31:16 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "libft.h"
 
-int	my_abs(int x)
-{	
-	if (x > 0)
-		return (x);
-	else
-		return (-x);
-}
-
-int	maxx(int a, int b)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	if (a > b)
-		return (a);
-	else if (b > a)
-		return (b);
-	else
-		return (a);
-}
+	const char	*sl;
+	char		*dl;
+	int			i;
 
-void	doublefree(char	**tmp)
-{
-	int	i;
-
+	sl = src;
+	dl = dest;
+	if (!src && !dest)
+		return (0);
 	i = 0;
-	if (tmp != NULL)
+	while (n--)
 	{
-		while (tmp[i])
-			free(tmp[i++]);
+		*(dl + i) = *(sl + i);
+		i++;
 	}
-	free(tmp);
+	return (dest);
 }

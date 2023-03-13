@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/06 12:34:02 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/08 03:29:12 by smagniny         ###   ########.fr       */
+/*   Created: 2022/09/26 10:33:08 by smagniny          #+#    #+#             */
+/*   Updated: 2022/10/02 18:19:05 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "libft.h"
 
-int	my_abs(int x)
-{	
-	if (x > 0)
-		return (x);
-	else
-		return (-x);
-}
-
-int	maxx(int a, int b)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (a > b)
-		return (a);
-	else if (b > a)
-		return (b);
-	else
-		return (a);
-}
-
-void	doublefree(char	**tmp)
-{
-	int	i;
+	unsigned int	i;
+	char			*str;
 
 	i = 0;
-	if (tmp != NULL)
+	if (s == NULL || f == NULL)
+		return (NULL);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!(str))
+		return (NULL);
+	while (s[i])
 	{
-		while (tmp[i])
-			free(tmp[i++]);
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	free(tmp);
+	str[i] = '\0';
+	return (str);
 }
