@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
+#    By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/03/08 14:01:51 by smagniny         ###   ########.fr        #
+#    Updated: 2023/03/25 17:37:03 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CYAN        = \033[1;36m
 NAME = FdF
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-
+DEBUG = -g -fsanitize=address
 SRC_FILES = src/main.c \
 	src/mlxplus.c src/init.c src/rdfile.c src/utils.c
 
@@ -36,19 +36,19 @@ ifeq ($(OS),Linux)
     LFLAGS := -lX11 -lXext
     LIBS := ./inc/libft/libft.a ./inc/mlx/libmlx_Linux.a
 else ifeq ($(OS),Darwin)
-    INC := -Imlx
-    LFLAGS := -lmlx -framework OpenGL -framework AppKit
-    LIBS := ./inc/libft.a
+	INC := -Imlx
+	LFLAGS := -lmlx -framework OpenGL -framework AppKit
+	LIBS := ./inc/libft/libft.a
 endif
 
 
 all: $(OBJS)
+	@make -C $(LIBFT)
     ifeq ($(OS),Linux)
-		make -C $(LIBFT)
-		make -C $(MLX)
-		$(CC) $(OBJS) -o $(NAME) $(LIBS) $(LFLAGS)
+		@make -C $(MLX)
+		$(CC) $(CFLAGS) $(DEBUG) $(OBJS)  -o $(NAME) $(LIBS) $(LFLAGS)
     else ifeq ($(OS),Darwin)
-        $(CC) $(OBJS) -o $(NAME) $(LIBS) $(LFLAGS)
+		$(CC) $(CFLAGS) $(DEBUG) $(OBJS) -o $(NAME) $(LIBS) $(LFLAGS)
     endif
 
 free:
