@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:58:21 by smagniny          #+#    #+#             */
 /*   Updated: 2023/03/06 12:17:03 by smagniny         ###   ########.fr       */
-=======
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 22:58:21 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/22 16:35:22 by smagniny         ###   ########.fr       */
->>>>>>> dev
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +45,7 @@ int	find_occurrence(const char *s, int c)
 		return (1);
 }
 
-<<<<<<< HEAD
 char	*ft_calloc(size_t count, size_t size)
-=======
-void	*ft_calloc(size_t count, size_t size)
->>>>>>> dev
 {
 	void	*ptr;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdfile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/25 17:36:12 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:55:01 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,7 @@ static int	get_row(char *fname)
 	return (line);
 }
 
-<<<<<<< HEAD
-char	*load(int fd)
-{
-	char	**tmp;
-	int 	i;
-
-	i = 0;
-	tmp = ft_split(get_next_line(fd), ' ');
-	while(tmp[i] != '\n')
-	{
-		if (tmp[i] >= '0' && tmp[i] <= '9')
-			
-	}
-}
-
-
-void	read_file(char *fname, t_mlx *mlx)
-=======
 static	void	load(char *fname, t_map *map)
->>>>>>> dev
 {
 	char	**tmp;
 	int		fd;
@@ -95,21 +76,6 @@ static	void	load(char *fname, t_map *map)
 	j = -1;
 	k = -1;
 	fd = open(fname, O_RDONLY);
-<<<<<<< HEAD
-	mlx->colsizebuff = get_col(fname);
-	mlx->linesizebuff = get_row(fname);
-	mlx->map = (char **)ft_calloc(mlx->linesizebuff, sizeof(char **));
-	while (++i < mlx->linesizebuff)
-		mlx->map[i] = ft_calloc(mlx->colsizebuff, sizeof(char *));
-	i = -1;
-	while (++i < mlx->linesizebuff)
-	{
-		tmp = ft_split(get_next_line(fd), ' ');
-		while()
-		mlx->map[i] = ;
-	}
-	close(fd);
-=======
 	while (++j < map->linesizebuff)
 	{	
 		i = -1;
@@ -132,12 +98,11 @@ void	read_file(char *fname, t_map *map)
 	int		i;
 
 	i = -1;
-	map->colsizebuff = get_col(fname) - 1;
-	map->linesizebuff = get_row(fname) - 1;
+	map->colsizebuff = get_col(fname);
+	map->linesizebuff = get_row(fname);
 	ft_printf("Rows : %d\nCols : %d\n", map->linesizebuff, map->colsizebuff);
-	map->map = (char **)ft_calloc(map->linesizebuff, sizeof(char **));
+	map->map = (int **)ft_calloc(map->linesizebuff, sizeof(int **));
 	while (++i < map->linesizebuff)
-		map->map[i] = ft_calloc(map->colsizebuff, sizeof(char));
+		map->map[i] = (int *)ft_calloc(map->colsizebuff, sizeof(int *));
 	load(fname, map);
->>>>>>> dev
 }

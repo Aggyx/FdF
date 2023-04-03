@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 18:54:35 by smagniny          #+#    #+#             */
 /*   Updated: 2023/03/05 10:32:16 by smagniny         ###   ########.fr       */
-=======
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 18:54:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/22 16:35:28 by smagniny         ###   ########.fr       */
->>>>>>> dev
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +95,5 @@ int		ft_printf(const char *str, ...);
 char	*get_next_line(int fd);
 char	*ft_strjoinfree(char *oldbuffer, char *tempbuffer);
 int		find_occurrence(const char *s, int c);
-<<<<<<< HEAD
 char	*ft_calloc(size_t count, size_t size);
-=======
-void	*ft_calloc(size_t count, size_t size);
->>>>>>> dev
 #endif

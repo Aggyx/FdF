@@ -6,7 +6,7 @@
 #    By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/03/25 17:37:03 by smagniny         ###   ########.fr        #
+#    Updated: 2023/03/28 15:38:44 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CYAN        = \033[1;36m
 NAME = FdF
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-DEBUG = -g -fsanitize=address
+DEBUG = -g3 -fsanitize=address
 SRC_FILES = src/main.c \
 	src/mlxplus.c src/init.c src/rdfile.c src/utils.c
 
