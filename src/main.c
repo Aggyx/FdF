@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:06:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/03 16:20:52 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:46:13 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/utils.h"
 
-int	handle_input(int keypress, t_mlx *mlx)
+static	int	handle_input(int keypress, t_mlx *mlx)
 {
 	if (keypress == 53)
 	{
@@ -23,6 +23,18 @@ int	handle_input(int keypress, t_mlx *mlx)
 		printf("Keypress:%d\n", keypress);
 	return (0);
 }
+
+// static	void	nxt_frame(t_mlx	*mlx)
+// {
+// 	//mlx_put_image_to_window(mlx.mlx, mlx->window, mlx->map->img, 0, 0);
+// }
+
+// static	void	frames_loop( t_mlx *mlx)
+// {
+// 	mlx_key_hook(mlx->mlx, handle_input, mlx);
+// 	mlx_loop_hook(mlx->mlx, nxt_frame, mlx);
+// 	mlx_loop(mlx->mlx);
+// }
 
 int	main(int argc, char **argv)
 {
@@ -36,8 +48,8 @@ int	main(int argc, char **argv)
 	read_file(argv[1], &map);
 	create_coords(&map);
 	rendermap(&map, map.mapcor, &map.img);
-	mlx_put_image_to_window(mlx.mlx, mlx.window, map.img.img, 5, 5);
+	mlx_put_image_to_window(mlx.mlx, mlx.window, map.img.img, 0, 0);
 	mlx_key_hook(mlx.window, handle_input, &mlx);
-	mlx_loop(&mlx);
+	mlx_loop(mlx.mlx);
 	return (0);
 }

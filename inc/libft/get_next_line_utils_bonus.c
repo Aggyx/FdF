@@ -6,7 +6,7 @@
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 22:58:21 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/06 12:17:03 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:51:27 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,4 @@ int	find_occurrence(const char *s, int c)
 		return (0);
 	else
 		return (1);
-}
-
-char	*ft_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	if (size * count < count && size * count < size)
-		return (0);
-	ptr = malloc(size * count);
-	if (!ptr)
-		return (0);
-	else
-		return (ft_memset(ptr, 0, size * count));
 }

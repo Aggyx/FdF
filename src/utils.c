@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:34:02 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/08 16:02:48 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/12 12:35:32 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ void	doublefree(char	**tmp)
 	free(tmp);
 }
 
+void	free_arrays(t_point **point_array, int **int_array, int rows)
+{	
+	while (rows--)
+	{
+		free(point_array[rows]);
+	}
+	free(point_array);
+	rows = rows + 1;
+	while (rows--)
+	{
+		free(int_array[rows]);
+	}
+	free(int_array);
+}
+
 void	panic(char *str)
 {
 	perror(str);
@@ -55,4 +70,22 @@ int	ft_strncmpers(char *s1, char *s2)
 		return (0);
 	else
 		return (1);
+}
+
+void	limits(t_img *img)
+{
+	t_point	p;
+
+	p.x = 0;
+	p.y = 0;
+	while (p.y < IMG_H)
+	{
+		while (p.x < IMG_W)
+		{
+			my_mlx_pixel_putcolor(img, &p, 0xFF0000);
+			p.x++;
+		}
+		p.x = 0;
+		p.y++;
+	}
 }

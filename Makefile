@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+         #
+#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/03/28 15:38:44 by smagniny         ###   ########.fr        #
+#    Updated: 2023/04/08 18:44:49 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ CYAN        = \033[1;36m
 ##COMP
 NAME = FdF
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
-DEBUG = -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+DEBUG = -g
 SRC_FILES = src/main.c \
-	src/mlxplus.c src/init.c src/rdfile.c src/utils.c
+	src/mlxplus.c src/init.c src/rdfile.c src/utils.c src/translate.c
 
 OBJS := $(SRC_FILES:%.c=%.o)
 

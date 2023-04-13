@@ -6,7 +6,7 @@
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 18:54:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/05 10:32:16 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:57:08 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+void	*ft_calloc(size_t	size, size_t count);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -95,5 +97,4 @@ int		ft_printf(const char *str, ...);
 char	*get_next_line(int fd);
 char	*ft_strjoinfree(char *oldbuffer, char *tempbuffer);
 int		find_occurrence(const char *s, int c);
-char	*ft_calloc(size_t count, size_t size);
 #endif
