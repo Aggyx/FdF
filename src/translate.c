@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:19:05 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/13 15:38:27 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/18 14:26:19 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	zoom(t_point *p, t_map *map)
 
 void	rotate(t_point *p)
 {
-	p->x = (p->x - p->y) * cos(0.513);
-	p->y = (p->x + p->y) * sin(0.513) - p->z;
+	p->x = (p->x - p->y) * cos(0.70);
+	p->y = (p->x + p->y) * sin(0.62) - p->z;
 }
 // void	matrixmult(t_point **mapcor, t_point **ref, t_map *map)
 // {

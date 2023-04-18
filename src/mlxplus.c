@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlxplus.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:18:36 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/13 15:41:10 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/18 15:55:33 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,65 +54,77 @@ If the resulting map is still larger than the size of the window, you can repeat
 // 	}
 // }
 
-// static	void	apply_resize(t_map *map, float scalef)
-// {
-// 	int	r;
-// 	int	c;
+static	void	apply_resize(t_map *map, float scalef)
+{
+	int	r;
+	int	c;
 
-// 	r = -1;
-// 	while (++r < map->linesizebuff)
-// 	{
-// 		c = -1;
-// 		while (++c < map->colsizebuff)
-// 		{
-// 			map->mapcor[r][c].x *= scalef;
-// 			map->mapcor[r][c].y *= scalef;
-// 			map->mapcor[r][c].z *= scalef;
-// 		}
-// 	}
-// }
+	r = -1;
+	while (++r < map->linesizebuff)
+	{
+		c = -1;
+		while (++c < map->colsizebuff)
+		{
+			map->mapcor[r][c].x *= scalef;
+			map->mapcor[r][c].y *= scalef;
+			map->mapcor[r][c].z *= scalef;
+		}
+	}
+}
 
-// static	float	resize(t_map *map, int lowest_y)
-// {
-// 	int	inmax_x;
-// 	int	inmax_y;
-// 	int	dxmap;
-// 	int	dymap;
+static	float	resize(t_map *map, int lowest_y)
+{
+	int	inmax_x;
+	int	inmax_y;
+	int	dxmap;
+	int	dymap;
 
-// 	inmax_x = map->mapcor[0][map->colsizebuff - 1].x;
-// 	dxmap = (inmax_x - map->mapcor[map->linesizebuff - 1][0].x);
-// 	inmax_y = map->mapcor[map->linesizebuff - 1][map->colsizebuff - 1].y;
-// 	dymap = (inmax_y - lowest_y);
-// 	printf("size of rotmap; %d * %d", dxmap, dymap);
-// 	if (inmax_x > map->colsizebuff || inmax_x < 0)
-// 		return (dxmap / IMG_W);
-// 	if (inmax_y > map->linesizebuff || inmax_y < 0)
-// 		return (dymap / IMG_H);
-// 	return (0);
-// }
+	inmax_x = map->mapcor[0][map->colsizebuff - 1].x;
+	dxmap = (inmax_x - map->mapcor[map->linesizebuff - 1][0].x);
+	inmax_y = map->mapcor[map->linesizebuff - 1][map->colsizebuff - 1].y;
+	dymap = (inmax_y - lowest_y);
+	printf("size of rotmap; %d * %d \n", dxmap, dymap);
+	if (inmax_x > IMG_W || inmax_x < 0)
+		return (IMG_W / dxmap);
+	if (inmax_y > IMG_H || inmax_y < 0)
+		return (IMG_H / dymap);
+	return (0);
+}
 
-// static	void	shift(t_map *map, int lowest_y)
-// {
-// 	int	r;
-// 	int	c;
-// 	int	inmax_y;
-// 	int	inmax_x;
+static	void	shift(t_map *map, int lowest_y)
+{
+	int	r;
+	int	c;
+	int	inmax_y;
+	int	inlow_x;
+	int	inmax_x;
 
-// 	r = -1;
-// 	inmax_x = map->mapcor[0][map->colsizebuff - 1].x;
-// 	inmax_y = map->mapcor[map->linesizebuff - 1][map->colsizebuff - 1].y;
-// 	while (++r < map->linesizebuff)
-// 	{
-// 		c = -1;
-// 		while (++c < map->colsizebuff)
-// 		{
-// 			map->mapcor[r][c].x += inmax_x - map->mapcor[map->linesizebuff - 1][0].x;
-// 			map->mapcor[r][c].y += (inmax_y - lowest_y);
-// 			printf("(%d, %d, %d) sur line %d, col %d\n , shift= X;%d Y;%d", map->mapcor[r][c].x, map->mapcor[r][c].y, map->mapcor[r][c].z, r, c, 
-// 				map->center_x - (inmax_x - map->mapcor[map->linesizebuff - 1][0].x), map->center_y - (inmax_y - lowest_y));
-// 		}
-// 	}
-// }
+	r = -1;
+	inmax_x = map->mapcor[0][map->colsizebuff - 1].x;
+	inlow_x = map->mapcor[map->linesizebuff - 1][0].x;
+	inmax_y = map->mapcor[map->linesizebuff - 1][map->colsizebuff - 1].y;
+	while (++r < map->linesizebuff)
+	{
+		c = -1;
+		while (++c < map->colsizebuff)
+		{	
+			// if (r == map->linesizebuff - 1)
+			// {
+			// 	map->mapcor[r][c].x += (inmax_x - map->mapcor[map->linesizebuff - 1][0].x);
+			// 	map->mapcor[r][c].y += (inmax_x - map->mapcor[map->linesizebuff - 1][0].x);
+			// }
+			// else
+			// {
+			// 	map->mapcor[r][c].x += map->center_x - (inmax_x - map->mapcor[map->linesizebuff - 1][0].x);
+			// 	map->mapcor[r][c].y += map->center_y - (inmax_y - lowest_y);
+			// }
+			map->mapcor[r][c].x += map->center_x - (inmax_x - inlow_x);
+			map->mapcor[r][c].y += map->center_y - (inmax_y - lowest_y);
+			// printf("(%d, %d, %d) sur line %d, col %d\n , shift= X;%d Y;%d", map->mapcor[r][c].x, map->mapcor[r][c].y, map->mapcor[r][c].z, r, c, 
+			// 	map->center_x - (inmax_x - map->mapcor[map->linesizebuff - 1][0].x), map->center_y - (inmax_y - lowest_y));
+		}
+	}
+}
 
 void	my_mlx_pixel_putcolor(t_img *img, t_point *p, int color)
 {
@@ -120,6 +132,7 @@ void	my_mlx_pixel_putcolor(t_img *img, t_point *p, int color)
 	int		i;
 
 	i = img->bpp - 8;
+	//printf("(%d, %d, %d) \n", p->x, p->y, p->z);
 	pixel = img->addr + (p->y * (img->line_len) + p->x * (img->bpp / 8));
 	while (i >= 0)
 	{
@@ -168,30 +181,30 @@ void	create_coords(t_map *map)
 			map->mapcor[r][c].z = map->map[r][c];
 			map->mapcor[r][c].x *= 10;
 			map->mapcor[r][c].y *= 10;
-			map->mapcor[r][c].z *= 10;
 			rotate(&map->mapcor[r][c]);
 
-			map->mapcor[r][c].x += 150;
-			map->mapcor[r][c].y += 150;
-			map->mapcor[r][c].z += 150;
-			printf("(%d, %d, %d) sur line %d, col %d\n", map->mapcor[r][c].x, map->mapcor[r][c].y, map->mapcor[r][c].z, r, c);
-			// transzoom(&map->mapcor[r][c], map);
+			// map->mapcor[r][c].x += 150;
+			// map->mapcor[r][c].y += 150;
+			// map->mapcor[r][c].z += 150;
+			//printf("(%d, %d, %d) sur line %d, col %d\n", map->mapcor[r][c].x, map->mapcor[r][c].y, map->mapcor[r][c].z, r, c);
 			if (map->mapcor[r][c].y < lowest_y)
            		lowest_y = map->mapcor[r][c].y;
 			c++;
 		}
-		printf("\n");
 		c = 0;
 		r++;
 	}
-	//shift(map, lowest_y);
-	//apply_rot(map);
-	// int res = resize(map, lowest_y);
-	// printf("scalef %d ;", res);
-	// if (res > 0 && res <= 1)
+	shift(map, lowest_y);
+	float res = resize(map, lowest_y);
+	printf("scalef = %f\n", res);
+	if (res > 0 && res <= 1)
+		apply_resize(map, resize(map, lowest_y));
+	// r = -1;
+	// while (++r < map->linesizebuff)
 	// {
-	// 	printf("Scalef = %d", res);
-	// 	apply_resize(map, resize(map, lowest_y));
+	// 	c = -1;
+	// 	while (++c < map->colsizebuff)
+	// 		printf("(%d, %d, %d) sur line %d, col %d\n", map->mapcor[r][c].x, map->mapcor[r][c].y, map->mapcor[r][c].z, r, c);
 	// }
 	printf("\nCoords added succesfully and lowest y is %d.\n", lowest_y);
 }
@@ -240,7 +253,7 @@ void bresenham(t_point p, t_point p1, t_img	*img)
 	{
 		if (ptmp.x >= 0 && ptmp.x < IMG_W && ptmp.y < IMG_H && ptmp.y >= 0)
 		{
-			//printf("(%d, %d, %d)", p.x, p.y, p.z);
+			//printf("before; (%d, %d, %d) \n", p.x, p.y, p.z);
 			if (ptmp.z > 5)
 				my_mlx_pixel_putcolor(img, &ptmp, 0x0000FF);
 			else
