@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 18:54:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/06 15:57:08 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:43:32 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	*ft_calloc(size_t	size, size_t count);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
+int		ft_isspace(int c);
 void	ft_bzero(void *s, size_t n);
 int		ft_isascii(int c);
 int		ft_isprint(int c);

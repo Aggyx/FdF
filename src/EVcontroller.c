@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   EVcontroller.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 14:06:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/27 17:41:08 by smagniny         ###   ########.fr       */
+/*   Created: 2023/04/25 10:35:43 by smagniny          #+#    #+#             */
+/*   Updated: 2023/04/27 17:51:41 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/utils.h"
 
-int	main(int argc, char **argv)
+static	int	handle_input(int keypress, t_mlx *mlx)
 {
-	t_mlx	mlx;
-
-	if (argc != 2)
-		return (0);
-	if (!init(&mlx, &mlx.map.img, &mlx.map))
-		return (0);
-	read_file(argv[1], &mlx.map);
-	create_coords(&mlx.map);
-	rendermap(&mlx);
-	EVcontroller(&mlx);
-	mlx_loop(mlx.mlx);
-	// mlx_destroy_image(mlx.mlx, mlx.map.img.img);
-	// mlx_destroy_window(mlx.mlx, mlx.window);
+	if (keypress == 53)
+		laferme(mlx);
+	else if (keypress == 126)
+	{
+		mlx->map.zoom += 2;
+		printf("Zooming +2...");
+	}
+	else if (keypress == 125)
+	{
+		mlx->map.zoom -= 2;
+		printf("Zooming -2...");
+	}
+	else
+		printf("Keypress:%d\n", keypress);
+	rendermap(mlx);
 	return (0);
+}
+
+void    EVcontroller(t_mlx  *mlx)
+{
+    mlx_hook(mlx->window, 17, 0, laferme, mlx);
+    mlx_key_hook(mlx->window, handle_input, mlx);
 }

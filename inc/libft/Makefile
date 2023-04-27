@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
+#    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/21 13:33:25 by smagniny          #+#    #+#              #
-#    Updated: 2023/04/06 15:49:35 by smagniny         ###   ########.fr        #
+#    Updated: 2023/04/25 12:43:50 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c ft_putendl_fd.c ft_split.c 
 		ft_printf_utils.c \
 		ft_printf.c \
 		ft_printf_unsigned.c \
+		ft_isspace.c
 
 OBJS = ${SRCS:.c=.o}
 

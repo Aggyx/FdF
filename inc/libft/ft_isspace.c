@@ -1,49 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_str.c                                    :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 11:41:12 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/25 16:54:43 by smagniny         ###   ########.fr       */
+/*   Created: 2018/07/01 15:37:24 by vbrazhni          #+#    #+#             */
+/*   Updated: 2023/04/25 12:43:21 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putchar(char c)
+int		ft_isspace(int c)
 {
-	return (write(1, &c, 1));
-}
-
-int	ft_putstr(char *s)
-{	
-	int	rtn;
-	int	i;
-
-	i = -1;
-	rtn = 0;
-	if (!s)
-	{
-		rtn += write(1, "(null)", 6);
-		return (rtn);
-	}
-	while (s[++i])
-	{
-		rtn += ft_putchar(s[i]);
-	}
-	return (rtn);
-}
-
-int	ft_printf_str(char *str)
-{	
-	int	rtn;
-
-	rtn = 0;
-	if (str == NULL)
-		rtn += ft_putstr("(null)");
-	else
-		rtn += ft_putstr(str);
-	return (rtn);
+	return (c == '\t' ||
+			c == '\n' ||
+			c == '\v' ||
+			c == '\f' ||
+			c == '\r' ||
+			c == ' ');
 }

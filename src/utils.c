@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 12:34:02 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/12 12:35:32 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/25 16:05:16 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ int	maxx(int a, int b)
 		return (b);
 	else
 		return (a);
+}
+
+int	ft_len(char **tmp)
+{	
+	int	i;
+	i = 0;
+	if (tmp[i])
+	{
+		while (tmp[i])
+			i++;
+	}
+	return (i);
 }
 
 void	doublefree(char	**tmp)
@@ -70,22 +82,4 @@ int	ft_strncmpers(char *s1, char *s2)
 		return (0);
 	else
 		return (1);
-}
-
-void	limits(t_img *img)
-{
-	t_point	p;
-
-	p.x = 0;
-	p.y = 0;
-	while (p.y < IMG_H)
-	{
-		while (p.x < IMG_W)
-		{
-			my_mlx_pixel_putcolor(img, &p, 0xFF0000);
-			p.x++;
-		}
-		p.x = 0;
-		p.y++;
-	}
 }

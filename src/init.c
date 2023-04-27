@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:36:01 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/13 13:59:54 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:54:13 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	init(t_mlx *mlx, t_img	*img, t_map *map)
 {
-	(void)img;
 	mlx->mlx = mlx_init();
 	if (mlx->mlx == NULL)
 		return (0);
@@ -27,8 +26,8 @@ int	init(t_mlx *mlx, t_img	*img, t_map *map)
 	img->img = mlx_new_image(mlx->mlx, IMG_W, IMG_H);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, \
 		&img->line_len, &img->endian);
-	map->zoom = 4;
-	map->center_x = (IMG_W / 2);
-	map->center_y = (IMG_H / 2);
+	map->zoom = 1;
+	map->event = 0;
+	map->lowest_y = 0;
 	return (1);
 }
