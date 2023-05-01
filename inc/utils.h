@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:24:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/27 17:27:50 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/30 23:51:10 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include "libft/libft.h"
-# include "limits.h" //  QUITA ESTA LIBRARIA LUEGO !!!
 # include <fcntl.h>
 # include <math.h>
 
@@ -51,20 +50,26 @@ typedef struct img_struc
 	int		endian;
 }				t_img;
 
+typedef struct t_imgmv
+{
+	int	Xaxis;
+	int	Yaxis;
+	int	Zaxis;
+}		t_mv;
+
 typedef struct map_struct
 {
 	t_pointinfo	**map;
 	t_point	**mapcor;
 	t_img	img;
+	t_mv	mv;
 	int		colsizebuff;
 	int		linesizebuff;
 	int		zoom;
 	int		resize;
-	int		lowest_y;
 	int		max_y;
 	int		lowest_x;
 	int		max_x;
-	int		event;
 }				t_map;
 
 typedef struct mlx_struc
@@ -84,10 +89,11 @@ float	resizecoef(t_map *map);
 void	shift(t_map *map, int lowest_y);
 void	rendermap(t_mlx *mlx);
 void	bresenham(t_point *p, t_point *p1, t_img	*img);
-void	rst_coords(t_map *map);
-void	rst_img(t_img	*img);
+void	drawrect(t_mlx *mlx);
+void	blscr(t_mlx *mlx);
 void	my_mlx_pixel_putcolor(t_img *img, t_point *p);
 int		laferme(t_mlx *mlx);
+void	pixelput(t_img *img, int x, int y);
 void    EVcontroller(t_mlx  *mlx);
 
 int		ft_len(char **tmp);
@@ -95,7 +101,7 @@ t_bool	ft_isnumber(char *str, int base);
 int		ft_atoi_base(const char *str, int base);
 int		my_abs(int x);
 int		maxx(int a, int b);
-void	free_arrays(t_point **point_array, int **int_array, int rows);
+void	free_arrays(t_point **point_array, t_pointinfo **int_array, int rows);
 void	doublefree(char	**tmp);
 void	panic(char *str);
 #endif

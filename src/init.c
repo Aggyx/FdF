@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:36:01 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/27 15:54:13 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/01 00:00:24 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,26 @@ int	init(t_mlx *mlx, t_img	*img, t_map *map)
 {
 	mlx->mlx = mlx_init();
 	if (mlx->mlx == NULL)
-		return (0);
+		panic("Error: mlx_init()\n	X_X\n");
 	mlx->window = mlx_new_window(mlx->mlx, IMG_W, IMG_H, "FdF - Cartographie");
 	if (mlx->window == NULL)
 	{
+		panic("Error: mlx_new_window()\n	X_X\n");
 		free(mlx->window);
 		return (0);
 	}
 	img->img = mlx_new_image(mlx->mlx, IMG_W, IMG_H);
+	if (!img->img)
+	{
+        panic("Error: mlx_new_image()\n    X_X\n");
+		free(mlx->window);
+        return (0);
+    }
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, \
 		&img->line_len, &img->endian);
 	map->zoom = 1;
-	map->event = 0;
-	map->lowest_y = 0;
+	map->mv.Xaxis = 0;
+	map->mv.Yaxis = 0;
+	map->mv.Zaxis = 1;
 	return (1);
 }

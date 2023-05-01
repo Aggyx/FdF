@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
+#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/04/27 17:08:20 by smagniny         ###   ########.fr        #
+#    Updated: 2023/05/01 22:55:32 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 DEBUG = -g
 SRC_FILES = src/main.c \
 	src/mlxplus.c src/init.c src/rdfile.c src/utils.c src/translate.c src/screenint.c src/EVcontroller.c \
-	src/utilsgetcolor.c 
+	src/utilsgetcolor.c \
+	src/drawrect.c
 
 OBJS := $(SRC_FILES:%.c=%.o)
 
@@ -68,7 +69,7 @@ lib:
 clean:
 	rm -f $(OBJS)
 
-fclean: clean
+fclean: clean free
 	@rm -f $(NAME)
 
 re: fclean all

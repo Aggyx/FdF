@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsgetcolor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 12:39:31 by vbrazhni          #+#    #+#             */
-/*   Updated: 2023/04/25 12:34:45 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/29 11:18:29 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** Check is this char present in selected numeral system
 */
 
-static int		ft_isdigit_base(char c, int base)
+static int	ft_isdigit_base(char c, int base)
 {
 	const char	*digits = "0123456789ABCDEF";
 	int			i;
