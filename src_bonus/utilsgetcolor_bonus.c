@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 12:39:31 by vbrazhni          #+#    #+#             */
-/*   Updated: 2023/05/02 11:23:16 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:33:45 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 **  and ft_isspace()
 */
 
-#include "../inc/utils.h"
+#include "../inc/utils_bonus.h"
 /*
- Check is this char present in selected numeral system
+** Check is this char present in selected numeral system
 */
 
 static int	ft_isdigit_base(char c, int base)
@@ -37,7 +37,7 @@ static int	ft_isdigit_base(char c, int base)
 }
 
 /*
- Check is this string contain prefix of its numeral system
+** Check is this string contain prefix of its numeral system
 */
 
 static t_bool	ft_has_prefix(const char *str, int base)
@@ -60,7 +60,7 @@ static t_bool	ft_has_prefix(const char *str, int base)
 }
 
 /*
- Check is this string a number according to the selected numeral system
+** Check is this string a number according to the selected numeral system
 */
 
 t_bool			ft_isnumber(char *str, int base)

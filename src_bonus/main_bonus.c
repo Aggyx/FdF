@@ -6,14 +6,15 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:06:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 11:16:11 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:44:39 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "../inc/utils_bonus.h"
 
 static int	frames_loop(t_mlx *mlx)
 {
+	drawrect(mlx);
 	rendermap(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->map.img.img, 0, 0);
 	return (0);

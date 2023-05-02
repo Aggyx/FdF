@@ -6,11 +6,11 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:36:01 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 11:24:05 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:33:25 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "../inc/utils_bonus.h"
 
 int	init(t_mlx *mlx, t_img	*img, t_map *map)
 {
@@ -34,5 +34,8 @@ int	init(t_mlx *mlx, t_img	*img, t_map *map)
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, \
 		&img->line_len, &img->endian);
 	map->zoom = 1;
+	map->mv.Xaxis = 0;
+	map->mv.Yaxis = 0;
+	map->mv.Zaxis = 1;
 	return (1);
 }

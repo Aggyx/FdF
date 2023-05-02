@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   drawrect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 22:44:26 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/30 23:19:45 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:33:14 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "../inc/utils_bonus.h"
 
 static	void	bresenhamv2(t_point *p, t_point *p1, t_img	*img)
 {

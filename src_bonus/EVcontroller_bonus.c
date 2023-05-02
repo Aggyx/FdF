@@ -6,11 +6,11 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:35:43 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 12:18:25 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:08:29 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "../inc/utils_bonus.h"
 
 void	blscr(t_mlx *mlx)
 {
@@ -38,7 +38,27 @@ static	int	handle_input(int keypress, t_mlx *mlx)
 {
 	if (keypress == 53)
 		laferme(mlx);
+	else if (keypress == 109 || keypress == 46)
+		mlx->map.zoom += 1;
+	else if ((keypress == 110 && mlx->map.zoom > 1) || \
+		(keypress == 46 && mlx->map.zoom > 1) )
+		mlx->map.zoom -= 1;
+	else if (keypress == 65362 || keypress == 126)
+		mlx->map.mv.Yaxis -= 5;
+	else if (keypress == 65364 || keypress == 125)
+		mlx->map.mv.Yaxis += 5;
+	else if (keypress == 65363 || keypress == 124)
+		mlx->map.mv.Xaxis += 5;
+	else if (keypress == 65361 || keypress == 123)
+		mlx->map.mv.Xaxis -= 5;
+	else if (keypress == 108 || keypress == 37)
+		mlx->map.mv.Zaxis += 1;
+	else if (keypress == 107 || keypress == 40)
+		mlx->map.mv.Zaxis -= 1;
+	else
+		printf("Keypress:%d\n", keypress);
 	blscr(mlx);
+	drawrect(mlx);
 	rendermap(mlx);
 	return (0);
 }

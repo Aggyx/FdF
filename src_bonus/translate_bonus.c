@@ -6,11 +6,11 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:19:05 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 12:00:11 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:33:37 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "../inc/utils_bonus.h"
 
 static	void	rotate(t_point *p)
 {
@@ -28,9 +28,11 @@ t_point	*zoomprojP(t_point *p, t_map *map)
 	p1->z = p->z * map->zoom;
 	p1->color = p->color;
 	rotate(p1);
-	p1->y -= p->z;
+	p1->y -= p->z * map->mv.Zaxis;
 	p1->x += ((IMG_W) / 2) - ((map->colsizebuff * map->zoom) / 2);
 	p1->y += ((IMG_H) / 2) - ((map->linesizebuff * map->zoom) / 2);
+	p1->x += map->mv.Xaxis;
+	p1->y += map->mv.Yaxis;
 	return (p1);
 }
 

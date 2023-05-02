@@ -6,34 +6,11 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:18:36 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 12:17:18 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:33:29 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
-
-void	resize(t_map *map)
-{
-	float	resx;
-	float	resy;
-	
-	resx = 0;
-	resy = 0;
-	map->max_y = map->mapcor[0][0].y;
-	map->max_x = map->mapcor[0][map->colsizebuff - 1].x;
-	map->lowest_x = map->mapcor[map->linesizebuff - 1][0].x;
-	resx = (map->max_x - map->lowest_x) / IMG_W;
-	resy = (map->max_y - map->lowest_y) / IMG_H;
-	map->zoom = (IMG_W - 20) / (map->max_x - map->lowest_x) / 3;
-	printf("(960 / %d = %d -> %d / 20 = %d zoom)",(map->max_x - map->lowest_x), (IMG_W - 20) / (map->max_x - map->lowest_x), (IMG_W - 20) / (map->max_x - map->lowest_x), map->zoom);
-	// if (resy < 0.1 || resx < 0.1)
-	// {
-	// 	map->zoom += 5;
-	// 	printf("resize zoom applied \n zoom : %d", map->zoom);
-	// }
-}
-
-
+#include "../inc/utils_bonus.h"
 
 void	create_coords(t_map *map)
 {
@@ -54,7 +31,6 @@ void	create_coords(t_map *map)
 		if (map->mapcor[i] == NULL)
 			panic("Error; ft_calloc mapcor[i]");
 	}
-	map->lowest_y = 2147483647;
 	while (r < map->linesizebuff)
 	{
 		while (c < map->colsizebuff)
@@ -63,8 +39,6 @@ void	create_coords(t_map *map)
 			map->mapcor[r][c].y = r;
 			map->mapcor[r][c].z = map->map[r][c].z;
 			map->mapcor[r][c].color = map->map[r][c].color;
-			if (map->mapcor[r][c].y < map->lowest_y)
-				map->lowest_y = map->mapcor[r][c].y;
 			// printf("(%d, %d, %d) sur line %d, col %d\n", map->mapcor[r][c].x, map->mapcor[r][c].y, map->mapcor[r][c].z, r, c);
 			c++;
 		}
@@ -72,7 +46,6 @@ void	create_coords(t_map *map)
 		c = 0;
 		r++;
 	}
-	resize(map);
 	free(map->map);
 }
 

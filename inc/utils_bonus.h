@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   utils_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:24:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 11:57:01 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/02 12:47:05 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	my_mlx_pixel_putcolor(t_img *img, t_point *p);
 int		laferme(t_mlx *mlx);
 void	pixelput(t_img *img, int x, int y);
 void    EVcontroller(t_mlx  *mlx);
-
+void 	drawrect(t_mlx *mlx);
 int		ft_len(char **tmp);
 t_bool	ft_isnumber(char *str, int base);
 int		ft_atoi_base(const char *str, int base);

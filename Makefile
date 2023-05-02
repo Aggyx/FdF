@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
+#    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/05/01 22:55:32 by smagniny         ###   ########.fr        #
+#    Updated: 2023/05/02 13:09:58 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,15 @@ DEBUG = -g
 SRC_FILES = src/main.c \
 	src/mlxplus.c src/init.c src/rdfile.c src/utils.c src/translate.c src/screenint.c src/EVcontroller.c \
 	src/utilsgetcolor.c \
-	src/drawrect.c
 
-OBJS := $(SRC_FILES:%.c=%.o)
+OBJS = $(SRC_FILES:%.c=%.o)
+
+SRCBONUS_FILES = src_bonus/main_bonus.c \
+	src_bonus/mlxplu_bonuss.c src_bonus/init_bonus.c src_bonus/rdfile_bonus.c src_bonus/utils_bonus.c src_bonus/translate_bonus.c src_bonus/screenint_bonus.c src_bonus/EVcontroller_bonus.c \
+	src_bonus/utilsgetcolor_bonus.c \
+	src_bonus/drawrect_bonus.c
+
+OBJS_BONUS = $(SRCBONUS_FILES:%.c=%.o)
 
 ##INCLUDES
 LIBFT = ./inc/libft/
@@ -43,7 +49,6 @@ else ifeq ($(OS),Darwin)
 	LIBS := ./inc/libft/libft.a
 endif
 
-
 all: $(OBJS)
 	@make -C $(LIBFT)
     ifeq ($(OS),Linux)
@@ -52,6 +57,17 @@ all: $(OBJS)
     else ifeq ($(OS),Darwin)
 		$(CC) $(CFLAGS) $(DEBUG) $(OBJS) -o $(NAME) $(LIBS) $(LFLAGS)
     endif
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean free
+	@rm -f $(NAME)
+
+re: fclean all
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 free:
 	@echo "$(GREEN)Supressing libraries files$(CYAN)"
@@ -63,15 +79,21 @@ lib:
 	@make -C $(MLX)
 	@make -C $(LIBFT)
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+bonus: $(OBJS_BONUS)
+	@make -C $(LIBFT)
+    ifeq ($(OS),Linux)
+		@make -C $(MLX)
+		$(CC) $(CFLAGS) $(OBJS_BONUS)  -o $(NAME) $(LIBS) $(LFLAGS)
+    else ifeq ($(OS),Darwin)
+		$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME) $(LIBS) $(LFLAGS)
+    endif
 
-clean:
-	rm -f $(OBJS)
+cleanb:
+	rm -f $(OBJS_BONUS)
 
-fclean: clean free
+fcleanb: cleanb
 	@rm -f $(NAME)
 
-re: fclean all
+rebonus: fcleanb bonus
 
-.PHONY: re, fclean, clean, lib, free
+.PHONY: all, clean, fclean, re, free, lib, bonus, cleanb, fcleanb, rebonus
