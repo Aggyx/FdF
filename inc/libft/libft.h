@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 18:54:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/25 12:43:32 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:32:20 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdarg.h>
 /*GNL*/
 # include <limits.h>
+
 typedef struct s_list
 {
 	void			*content;

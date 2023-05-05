@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:06:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 11:16:11 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:16:40 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
+		read_file(argv[1], &mlx.map);
 		if (!init(&mlx, &mlx.map.img, &mlx.map))
 			return (0);
-		read_file(argv[1], &mlx.map);
 		create_coords(&mlx.map);
-		EVcontroller(&mlx);
+		mlx.map.zoom = resizecoef(&mlx.map);
+		evcontroller(&mlx);
 		mlx_loop_hook(mlx.mlx, frames_loop, &mlx);
 		mlx_loop(mlx.mlx);
 	}

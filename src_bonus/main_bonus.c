@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 14:06:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 12:44:39 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:58:14 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 			return (0);
 		read_file(argv[1], &mlx.map);
 		create_coords(&mlx.map);
-		EVcontroller(&mlx);
+		evcontroller(&mlx);
 		mlx_loop_hook(mlx.mlx, frames_loop, &mlx);
 		mlx_loop(mlx.mlx);
 	}

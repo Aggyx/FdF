@@ -3,40 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   rdfile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/01 14:55:46 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:32:14 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/utils.h"
 
-static int	get_col(char *fname)
+static int	get_col(char *fname, int lines)
 {
 	int		f;
-	int		i;
+	int		t;
 	int		col;
 	char	**tmp;
 	char	*raw;
 
-
-	i = 0;
+	t = -1;
 	col = 0;
-	f = open(fname, O_RDONLY);
-	if (f == -1)
-		return (0);
-	else
+	f = openfd(fname);
+	while (lines--)
 	{
 		raw = get_next_line(f);
 		tmp = ft_split(raw, ' ');
 		free(raw);
-		while (tmp[i])
-		{
-			col += 1;
-			++i;
-		}
+		col = ft_len(tmp);
 		doublefree(tmp);
+		if (t != -1 && t != col)
+		{	
+			ft_printf("FdF: line %d: %dcols\n%d was expected\n", lines, col, t);
+			return (0);
+		}
+		t = col;
 	}
 	close(f);
 	return (col);
@@ -97,20 +96,16 @@ static	void	load(char *fname, t_map *map)
 	int		j;
 
 	j = -1;
-	fd = open(fname, O_RDONLY);
-	if (fd == -1)
-		panic("FdF: Could not open file.\n");
-	while (++j < map->linesizebuff)
+	fd = openfd(fname);
+	while (++j < map->lines)
 	{
 		i = -1;
 		tmpp = get_next_line(fd);
-		if (!tmpp)
-			panic("FdF: Could not allocate memory.\n");
 		tmp = ft_split(tmpp, ' ');
 		free(tmpp);
 		if (!tmp)
 			panic("FdF: Could not allocate memory.\n");
-		while (++i < map->colsizebuff && tmp[i])
+		while (++i < map->col && tmp[i])
 		{
 			map->map[j][i].z = ft_atoi(tmp[i]);
 			map->map[j][i].color = retrieve_color(tmp[i]);
@@ -125,26 +120,22 @@ void	read_file(char *fname, t_map *map)
 	int	i;
 	int	fd;
 
-    fd = open(fname, O_RDONLY);
+	fd = openfd(fname);
 	i = 0;
-	if (!fd)
-		panic("FdF: Could not open file.\n");
 	close(fd);
-	map->colsizebuff = get_col(fname);
-	map->linesizebuff = get_row(fname);
-	if (map->colsizebuff == 0 || map->linesizebuff == 0)
-		panic("FdF: Nothing in file.\n");
-	map->map = (t_pointinfo **)ft_calloc(sizeof(t_pointinfo **), map->linesizebuff);
-	if (!map->map) 
+	map->lines = get_row(fname);
+	map->col = get_col(fname, map->lines);
+	if (map->col == 0 || map->lines == 0)
+		panic("FdF: Invalid map.\n");
+	map->map = (t_pif **)ft_calloc(sizeof(t_pif **), map->lines);
+	if (!map->map)
 		panic("FdF: Could not allocate memory for map.");
-	while (i < map->linesizebuff)
+	while (i < map->lines)
 	{
-		map->map[i] = (t_pointinfo *)ft_calloc(sizeof(t_pointinfo *), map->colsizebuff);
+		map->map[i] = (t_pif *)ft_calloc(sizeof(t_pif *), map->col);
 		if (!map->map[i])
 			panic("FdF: Could not allocate memory for map.");
 		i++;
 	}
 	load(fname, map);
 }
-
-

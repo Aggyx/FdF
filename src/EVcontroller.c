@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:35:43 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/02 12:18:25 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:06:44 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	blscr(t_mlx *mlx)
 		j = 9;
 		while (j < IMG_W - 10)
 		{
-			p = mlx->map.img.addr + (i * mlx->map.img.line_len + j * (mlx->map.img.bpp / 8));
+			p = mlx->map.img.addr + \
+				(i * mlx->map.img.line_len + j * (mlx->map.img.bpp / 8));
 			*(unsigned int *)p = 0x00000000;
 			j++;
 		}
@@ -43,8 +44,8 @@ static	int	handle_input(int keypress, t_mlx *mlx)
 	return (0);
 }
 
-void    EVcontroller(t_mlx  *mlx)
+void	evcontroller(t_mlx *mlx)
 {
-    mlx_hook(mlx->window, 17, 0, laferme, mlx);
-    mlx_key_hook(mlx->window, handle_input, mlx);
+	mlx_hook(mlx->window, 17, 0, laferme, mlx);
+	mlx_key_hook(mlx->window, handle_input, mlx);
 }
