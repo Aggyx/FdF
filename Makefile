@@ -6,27 +6,27 @@
 #    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/05/02 13:09:58 by smagniny         ###   ########.fr        #
+#    Updated: 2023/05/11 16:29:26 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-### COLORS ###
+#COLORS
 GREEN       = \033[1;32m
 CYAN        = \033[1;36m
 
-##COMP
+#COMP
 NAME = FdF
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 DEBUG = -g
 SRC_FILES = src/main.c \
 	src/mlxplus.c src/init.c src/rdfile.c src/utils.c src/translate.c src/screenint.c src/EVcontroller.c \
-	src/utilsgetcolor.c \
+	src/utilsgetcolor.c src/ft_split.c
 
 OBJS = $(SRC_FILES:%.c=%.o)
 
 SRCBONUS_FILES = src_bonus/main_bonus.c \
-	src_bonus/mlxplu_bonuss.c src_bonus/init_bonus.c src_bonus/rdfile_bonus.c src_bonus/utils_bonus.c src_bonus/translate_bonus.c src_bonus/screenint_bonus.c src_bonus/EVcontroller_bonus.c \
+	src_bonus/mlxplus_bonus.c src_bonus/init_bonus.c src_bonus/rdfile_bonus.c src_bonus/utils_bonus.c src_bonus/translate_bonus.c src_bonus/screenint_bonus.c src_bonus/EVcontroller_bonus.c \
 	src_bonus/utilsgetcolor_bonus.c \
 	src_bonus/drawrect_bonus.c
 
@@ -50,12 +50,13 @@ else ifeq ($(OS),Darwin)
 endif
 
 all: $(OBJS)
-	@make -C $(LIBFT)
+	@make -sC $(LIBFT)
+	@echo  "$(GREEN)Creating libraries files$(CYAN)"
     ifeq ($(OS),Linux)
-		@make -C $(MLX)
-		$(CC) $(CFLAGS) $(DEBUG) $(OBJS)  -o $(NAME) $(LIBS) $(LFLAGS)
+		@make -sC $(MLX)
+		$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) $(LIBS) $(LFLAGS)
     else ifeq ($(OS),Darwin)
-		$(CC) $(CFLAGS) $(DEBUG) $(OBJS) -o $(NAME) $(LIBS) $(LFLAGS)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS) $(LFLAGS)
     endif
 
 clean:
@@ -71,18 +72,13 @@ re: fclean all
 
 free:
 	@echo "$(GREEN)Supressing libraries files$(CYAN)"
-	@make fclean -C $(LIBFT)
-	@make clean -C $(MLX)
-
-lib:
-	@echo "$(GREEN)Creating lib files$(CYAN)"
-	@make -C $(MLX)
-	@make -C $(LIBFT)
+	@make fclean -sC $(LIBFT)
 
 bonus: $(OBJS_BONUS)
-	@make -C $(LIBFT)
+	@make -sC $(LIBFT)
+	@echo  "$(GREEN)Creating libraries files$(CYAN)"
     ifeq ($(OS),Linux)
-		@make -C $(MLX)
+		@make -sC $(MLX)
 		$(CC) $(CFLAGS) $(OBJS_BONUS)  -o $(NAME) $(LIBS) $(LFLAGS)
     else ifeq ($(OS),Darwin)
 		$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME) $(LIBS) $(LFLAGS)
@@ -91,8 +87,13 @@ bonus: $(OBJS_BONUS)
 cleanb:
 	rm -f $(OBJS_BONUS)
 
-fcleanb: cleanb
+fcleanb: cleanb free
 	@rm -f $(NAME)
+
+freelinux:
+	@echo "$(GREEN)Supressing libraries files$(CYAN)"
+	@make fclean -C $(LIBFT)
+	@make fclean -C $(MLX)
 
 rebonus: fcleanb bonus
 

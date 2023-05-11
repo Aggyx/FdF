@@ -6,7 +6,7 @@
 #    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/21 13:33:25 by smagniny          #+#    #+#              #
-#    Updated: 2023/04/25 12:43:50 by smagniny         ###   ########.fr        #
+#    Updated: 2023/05/05 16:30:51 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,15 @@ ERASE = rm -rf
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 	
 %.o : %.c
-	gcc -Wall -Werror -Wextra -c $< 
+	@gcc -Wall -Werror -Wextra -c $< 
 	
 clean:
-	${ERASE} ${OBJS} ${OBJS_B}
+	@${ERASE} ${OBJS} ${OBJS_B}
 fclean:
-	${ERASE} ${OBJS} ${OBJS_B} ${NAME}
+	@${ERASE} ${OBJS} ${OBJS_B} ${NAME}
 
 re: fclean all
 

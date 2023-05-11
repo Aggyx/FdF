@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilsgetcolor.c                                    :+:      :+:    :+:   */
+/*   utilsgetcolor_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 12:39:31 by vbrazhni          #+#    #+#             */
-/*   Updated: 2023/05/02 12:33:45 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:57:21 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 */
 
 #include "../inc/utils_bonus.h"
+
 /*
 ** Check is this char present in selected numeral system
 */
-
 static int	ft_isdigit_base(char c, int base)
 {
 	const char	*digits = "0123456789ABCDEF";
@@ -48,22 +48,22 @@ static t_bool	ft_has_prefix(const char *str, int base)
 	if (base == 2 || base == 8 || base == 16)
 	{
 		if (str[i++] != '0')
-			return (false);
+			return (False);
 		if (base == 2 && (str[i] == 'b' || str[i] == 'B'))
-			return (true);
+			return (True);
 		if (base == 16 && (str[i] == 'x' || str[i] == 'X'))
-			return (true);
+			return (True);
 		if (base == 8)
-			return (true);
+			return (True);
 	}
-	return (false);
+	return (False);
 }
 
 /*
 ** Check is this string a number according to the selected numeral system
 */
 
-t_bool			ft_isnumber(char *str, int base)
+t_bool	ft_isnumber(char *str, int base)
 {
 	size_t		i;
 	size_t		digits;
@@ -73,7 +73,7 @@ t_bool			ft_isnumber(char *str, int base)
 	while (ft_isspace(str[i]))
 		i++;
 	if (!ft_has_prefix(&str[i], base))
-		return (false);
+		return (False);
 	if (base == 16)
 		i += 2;
 	while (ft_isdigit_base(str[i], base) >= 0)
@@ -81,14 +81,16 @@ t_bool			ft_isnumber(char *str, int base)
 		i++;
 		digits++;
 	}
-	return ((!str[i] && digits) ? true : false);
+	if (!str[i] && digits)
+		return (True);
+	return (False);
 }
 
 /*
 ** Convert string to number according to the selected numeral system
 */
 
-int				ft_atoi_base(const char *str, int base)
+int	ft_atoi_base(const char *str, int base)
 {
 	unsigned long	result;
 	size_t			i;
@@ -100,13 +102,16 @@ int				ft_atoi_base(const char *str, int base)
 	while (ft_isspace(str[i]))
 		i++;
 	if (base != 10 && !ft_has_prefix(&str[i], base))
-		return (false);
+		return (False);
 	if (base == 2 || base == 16)
 		i += 2;
 	else if (base == 8)
 		i++;
 	else if (base == 10 && (str[i] == '-' || str[i] == '+'))
-		sign = (str[i++] == '-') ? -1 : 1;
+	{
+		if (str[i++] == '-')
+			sign = -1;
+	}
 	while (ft_isdigit_base(str[i], base) >= 0)
 		result = result * base + ft_isdigit_base(str[i++], base);
 	return ((int)(result * sign));
