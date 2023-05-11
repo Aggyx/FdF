@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:17:21 by smagniny          #+#    #+#             */
-/*   Updated: 2022/10/10 14:05:56 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:11:04 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_count_words(char const *s, char c)
 
 	nb = 0;
 	i = 0;
-	while (s[i])
+	while (s[i] && s[i] != '\n')
 	{
 		while (s[i] == c)
 			i++;
@@ -92,6 +92,6 @@ char	**ft_split(char const *s, char c)
 			s++;
 		i++;
 	}
-	res[i] = 0;
+	res[i] = NULL;
 	return (res);
 }
