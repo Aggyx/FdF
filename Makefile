@@ -6,7 +6,7 @@
 #    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/05/11 16:29:26 by smagniny         ###   ########.fr        #
+#    Updated: 2023/05/15 13:46:10 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CYAN        = \033[1;36m
 
 #COMP
 NAME = FdF
+NAMEB = FdF_bonus
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 DEBUG = -g
@@ -28,7 +29,8 @@ OBJS = $(SRC_FILES:%.c=%.o)
 SRCBONUS_FILES = src_bonus/main_bonus.c \
 	src_bonus/mlxplus_bonus.c src_bonus/init_bonus.c src_bonus/rdfile_bonus.c src_bonus/utils_bonus.c src_bonus/translate_bonus.c src_bonus/screenint_bonus.c src_bonus/EVcontroller_bonus.c \
 	src_bonus/utilsgetcolor_bonus.c \
-	src_bonus/drawrect_bonus.c
+	src_bonus/drawrect_bonus.c \
+	src_bonus/ft_split.c
 
 OBJS_BONUS = $(SRCBONUS_FILES:%.c=%.o)
 
@@ -79,9 +81,9 @@ bonus: $(OBJS_BONUS)
 	@echo  "$(GREEN)Creating libraries files$(CYAN)"
     ifeq ($(OS),Linux)
 		@make -sC $(MLX)
-		$(CC) $(CFLAGS) $(OBJS_BONUS)  -o $(NAME) $(LIBS) $(LFLAGS)
+		$(CC) $(CFLAGS) $(OBJS_BONUS)  -o $(NAMEB) $(LIBS) $(LFLAGS)
     else ifeq ($(OS),Darwin)
-		$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAME) $(LIBS) $(LFLAGS)
+		$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAMEB) $(LIBS) $(LFLAGS)
     endif
 
 cleanb:

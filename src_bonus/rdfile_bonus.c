@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdfile_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/12 11:10:34 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:47:40 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ static int	get_col_norm(int f)
 	while (raw[i] && raw[i] != '\n')
 	{
 		while (raw[i] && raw[i] == ' ' && raw[i] != '\n')
-            i++;
+			i++;
 		while (raw[i] && raw[i] != ' ' && raw[i] != '\n')
-        {
-            if ((raw[i] <= 0 || raw[i] >= 9) && (raw[i] != ',') && (raw[i] != 'x') && (raw[i] <= 'a' && raw[i] >= 'f') && (raw[i] <= 'A' && raw[i] >= 'F'))
+		{
+			if ((raw[i] <= 0 || raw[i] >= 9) && (raw[i] != ',') && \
+				(raw[i] != 'x') && (raw[i] <= 'a' && raw[i] >= 'f') && \
+				(raw[i] <= 'A' && raw[i] >= 'F'))
 				panic("FdF: Invalid map");
-            i++;
-        }
-        if (raw[i] && raw[i] == '\n')
-            break ;
-        col++;
-        i++;
+			i++;
+		}
+		if (raw[i] && raw[i] == '\n')
+			break ;
+		col++;
+		i++;
 	}
 	return (col);
 }
@@ -51,7 +53,6 @@ static int	get_col(char *fname, int lines)
 	while (lines--)
 	{
 		col = get_col_norm(f);
-		printf("%d -> %dcol\n", lines, col);
 		if (t != -1 && t != col)
 			printf("line %d has %dcols\n", lines, col);
 		t = col;
@@ -68,106 +69,45 @@ static int	get_row(char *fname)
 	int		line;
 
 	i = 0;
+	c = 1;
 	line = 0;
-	f = open(fname, O_RDONLY);
-	if (f == -1)
-		return (0);
-	else
+	f = openfd(fname);
+	while (read(f, &c, 1) > 0)
 	{
-		while (read(f, &c, 1) > 0)
-		{
-			if (c == '\n' || c == '\0')
-				line += 1;
-			i++;
-		}
+		if (c == '\n' || c == '\0')
+			line += 1;
+		else if (c < 0)
+			panic("FdF: Invalid file");
+		i++;
 	}
 	close(f);
 	return (line);
 }
 
-static int	retrieve_color(char *tmp)
-{
-	char	**parts;
-	int		res;
-
-	parts = ft_split(tmp, ',');
-	if (ft_len(parts) <= 1)
-	{
-		doublefree(parts);
-		return (0xFFFFFF);
-	}
-	else if (parts[1] && !ft_isnumber(parts[1], 16))
-	{
-		doublefree(parts);
-		return (0xFFFFFF);
-	}
-	res = ft_atoi_base(parts[1], 16);
-	doublefree(parts);
-	return (res);
-}
-
-// static	void	load(char *fname, t_map *map)
-// {
-// 	char	**tmp;
-// 	char	*tmpp;
-// 	int		fd;
-// 	int		i;
-// 	int		j;
-
-// 	j = -1;
-// 	fd = openfd(fname);
-// 	while (++j < map->lines)
-// 	{
-// 		i = -1;
-// 		tmpp = get_next_line(fd);
-// 		tmp = ft_split(tmpp, ' ');
-// 		free(tmpp);
-// 		if (!tmp)
-// 			panic("FdF: Could not allocate memory.\n");
-// 		while (++i < map->col && tmp[i])
-// 		{
-// 			map->map[j][i].z = ft_atoi(tmp[i]);
-// 			map->map[j][i].color = retrieve_color(tmp[i]);
-// 		}
-// 		doublefree(tmp);
-// 	}
-// 	close(fd);
-// }
-
 static	void	load(char *fname, t_map *map)
 {
-	char	*r;
+	char	**tmp;
+	char	*tmpp;
 	int		fd;
 	int		i;
 	int		j;
-	int		k;
 
 	j = -1;
-	k = 0;
 	fd = openfd(fname);
 	while (++j < map->lines)
 	{
 		i = -1;
-		r = get_next_line(fd);
-		while (r[i] && r[i] != '\n')
+		tmpp = get_next_line(fd);
+		tmp = ssplit(tmpp, ' ');
+		free(tmpp);
+		if (!tmp)
+			panic("FdF: Could not allocate memory.\n");
+		while (++i < (map->col))
 		{
-			while (r[i] && r[i] == ' ' && r[i] != '\n')
-				i++;
-			if ((r[i] >= '0' && r[i] <= '9'))
-			{
-				map->map[j][k].z = ft_atoi(ft_strdup(ft_strlcpytosp(r[i]));
-				map->map[j][k++].color = retrieve_color(r[i++]);
-			}
-			while ((r[i] >= '0' && r[i] <= '9') || (r[i] == ',') || (r[i] == 'x') || \
-				(r[i] >= 'a' && r[i] <= 'f') || (r[i] >= 'A' && r[i] <= 'F'))
-				i++;
-			while (r[i] && r[i] != ' ' && r[i] != '\n')
-				i++;
-			if (r[i] && r[i] == '\n')
-				break ;
+			map->map[j][i].z = ft_atoi(tmp[i]);
+			map->map[j][i].color = retrieve_color(tmp[i]);
 		}
-		free(r);
-
+		doublefree(tmp);
 	}
 	close(fd);
 }
@@ -185,12 +125,12 @@ void	read_file(char *fname, t_map *map)
 	if (map->col == 0 || map->lines == 0)
 		panic("FdF: Nothing in file.\n");
 	map->map = (t_pif **)ft_calloc(sizeof(t_pif **), map->lines);
-	if (!map->map)
+	if (map->map == NULL)
 		panic("FdF: Could not allocate memory for map.");
 	while (i < map->lines)
 	{
-		map->map[i] = (t_pif *)ft_calloc(sizeof(t_pif *), map->col);
-		if (!map->map[i])
+		map->map[i] = (t_pif *)ft_calloc(sizeof(t_pif *), map->col + 1);
+		if (map->map[i] == NULL)
 			panic("FdF: Could not allocate memory for map.");
 		i++;
 	}

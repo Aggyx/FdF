@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:36:01 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/12 10:53:40 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:43:04 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/utils.h"
 
-int	*openfd(char *fname)
+int	openfd(char *fname)
 {
 	int	f;
 
@@ -43,6 +43,6 @@ int	init(t_mlx *mlx, t_img	*img, t_map *map)
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, \
 		&img->line_len, &img->endian);
-	map->zoom = 2;
+	map->zoom = 1;
 	return (1);
 }

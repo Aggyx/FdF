@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:24:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/12 10:53:33 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:55:46 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_BONUS_H
 # define UTILS_BONUS_H
 
-# include "mlx/mlx.h"
+# include <mlx.h>
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
@@ -89,23 +89,27 @@ typedef struct t_bresenval
 	int	error;
 }	t_bresenvalues;
 
+//init
 int		init(t_mlx *mlx, t_img	*img, t_map *map);
 void	read_file(char *fname, t_map *map);
-void	create_coords(t_map *map);
-t_point	*zoomproj(t_point *p, t_map *map);
+int		openfd(char *fname);
+//mlx && points
 void	rendermap(t_mlx *mlx);
 void	bresenham(t_point *p, t_point *p1, t_img	*img);
-void	blscr(t_mlx *mlx);
 void	my_mlx_pixel_putcolor(t_img *img, t_point *p);
+void	create_coords(t_map *map);
+t_point	*zoomproj(t_point *p, t_map *map);
+//EV
+void	blscr(t_mlx *mlx);
 int		laferme(t_mlx *mlx);
-int		openfd(char *fname);
 void	evcontroller(t_mlx *mlx);
 void	drawrect(t_mlx *mlx);
+//auxiliaries
+int		retrieve_color(char *tmp);
 int		ft_len(char **tmp);
-t_bool	ft_isnumber(char *str, int base);
-int		ft_atoi_base(const char *str, int base);
 int		my_abs(int x);
 int		maxx(int a, int b);
+char	**ssplit(char const *s, char c);
 void	doublefree(char	**tmp);
 void	panic(char *str);
 #endif

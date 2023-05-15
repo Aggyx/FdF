@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:18:36 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/05 16:05:50 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:47:11 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,25 @@ static void	init_point(t_point *point, int x, int y, int z)
 	point->x = x;
 	point->y = y;
 	point->z = z;
+}
+
+static	void	resize(t_map *map)
+{
+	int		z;
+	int		dx;
+
+	z = 1;
+	map->max_x = map->mapcor[0][map->col].x;
+	map->lowest_x = map->mapcor[map->lines - 1][0].x;
+	map->max_y = map->mapcor[map->lines - 1][map->col].y;
+	map->lowest_y = map->mapcor[0][0].y;
+	dx = map->max_x - map->lowest_x;
+	while (((float)dx / (float)(IMG_W - 20)) < 1)
+	{
+		dx *= z;
+		z++;
+	}
+	map->zoom = z;
 }
 
 void	create_coords(t_map *map)
@@ -32,20 +51,19 @@ void	create_coords(t_map *map)
 		panic("Error: ft_calloc mapcor");
 	while (++i < map->lines)
 	{
-		map->mapcor[i] = (t_point *)ft_calloc(sizeof(t_point), map->col);
+		map->mapcor[i] = (t_point *)ft_calloc(sizeof(t_point), map->col + 1);
 		if (map->mapcor[i] == NULL)
 			panic("Error; ft_calloc mapcor[i]");
-		while (++c < map->col)
+		while (++c < map->col + 1)
 		{
 			init_point(&map->mapcor[i][c], c, i, map->map[i][c].z);
 			map->mapcor[i][c].color = map->map[i][c].color;
-			if (map->mapcor[i][c].y < map->lowest_y)
-				map->lowest_y = map->mapcor[i][c].y;
 		}
 		c = -1;
 		free(map->map[i]);
 	}
 	free(map->map);
+	resize(map);
 }
 
 static void	set_step(t_point *p, t_point *p1, t_bresenvalues *val)
@@ -62,52 +80,27 @@ static void	set_step(t_point *p, t_point *p1, t_bresenvalues *val)
 
 void	bresenham(t_point *p, t_point *p1, t_img	*img)
 {
-	t_bresenvalues	*val;
+	t_bresenvalues	val;
 
-	val = ft_calloc(sizeof(t_bresenvalues), 1);
-	val->dx = abs(p1->x - p->x);
-	val->dy = abs(p1->y - p->y);
-	set_step(p, p1, val);
-	val->error = val->dx - val->dy;
+	val.dx = abs(p1->x - p->x);
+	val.dy = abs(p1->y - p->y);
+	set_step(p, p1, &val);
+	val.error = val.dx - val.dy;
 	while (p->x != p1->x || p->y != p1->y)
 	{
 		if (p->x >= 10 && p->x < IMG_W - 10 && p->y < IMG_H - 10 && p->y >= 10)
 			my_mlx_pixel_putcolor(img, p);
-		if (val->error > 0)
+		if (val.error > 0)
 		{
-			p->x += val->x_step;
-			val->error -= val->dy;
+			p->x += val.x_step;
+			val.error -= val.dy;
 		}
 		else
 		{
-			p->y += val->y_step;
-			val->error += val->dx;
+			p->y += val.y_step;
+			val.error += val.dx;
 		}
 	}
-	free(val);
 	free(p);
 	free(p1);
-}
-
-void	rendermap(t_mlx *mlx)
-{
-	int	r;
-	int	c;
-
-	r = -1;
-	while (++r < mlx->map.lines)
-	{
-		c = -1;
-		while (++c < mlx->map.col)
-		{
-			if (c < mlx->map.col - 1)
-				bresenham(zoomproj(&mlx->map.mapcor[r][c], &mlx->map), \
-				zoomproj(&mlx->map.mapcor[r][(c + 1)], &mlx->map), \
-				&mlx->map.img);
-			if (r < mlx->map.lines - 1)
-				bresenham(zoomproj(&mlx->map.mapcor[r][c], &mlx->map), \
-				zoomproj(&mlx->map.mapcor[(r + 1)][c], &mlx->map), \
-				&mlx->map.img);
-		}
-	}
 }

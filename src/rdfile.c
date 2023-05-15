@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/11 19:22:21 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:28:51 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,42 +69,19 @@ static int	get_row(char *fname)
 	int		line;
 
 	i = 0;
+	c = 1;
 	line = 0;
-	f = open(fname, O_RDONLY);
-	if (f == -1)
-		return (0);
-	else
+	f = openfd(fname);
+	while (read(f, &c, 1) > 0)
 	{
-		while (read(f, &c, 1) > 0)
-		{
-			if (c == '\n' || c == '\0')
-				line += 1;
-			i++;
-		}
+		if (c == '\n' || c == '\0')
+			line += 1;
+		else if (c < 0)
+			panic("FdF: Invalid file");
+		i++;
 	}
 	close(f);
 	return (line);
-}
-
-static int	retrieve_color(char *tmp)
-{
-	char	**parts;
-	int		res;
-
-	parts = ft_split(tmp, ',');
-	if (ft_len(parts) <= 1)
-	{
-		doublefree(parts);
-		return (0xFFFFFFFF);
-	}
-	else if (parts[1] && !ft_isnumber(parts[1], 16))
-	{
-		doublefree(parts);
-		return (0xFFFFFFFF);
-	}
-	res = ft_atoi_base(parts[1], 16);
-	doublefree(parts);
-	return (res);
 }
 
 static	void	load(char *fname, t_map *map)
@@ -135,48 +112,6 @@ static	void	load(char *fname, t_map *map)
 	close(fd);
 }
 
-// static	void	load(char *fname, t_map *map)
-// {
-// 	char	*tmpp;
-// 	int		fd;
-// 	int		i;
-// 	int		j;
-// 	int		k
-
-// 	j = -1;
-// 	fd = openfd(fname);
-// 	while (++j < map->lines)
-// 	{
-// 		i = 0;
-// 		k = 0;
-// 		tmpp = get_next_line(fd);
-// 		while (tmpp[k] && tmpp[k] != '\n')
-// 		{
-// 			while (tmpp[k] && tmpp[k] == ' ' && tmpp[k] != '\n')
-// 				k++;
-// 			while (tmpp[k] && tmpp[k] != ' ' && tmpp[k] != '\n')
-// 			{
-// 				map->map[j][i].z = ft_atoi(tmpp[k]);
-// 				map->map[j][i].color = retrieve_color();
-// 				if ((tmpp[k] <= 0 || tmpp[k] >= 9) && \
-// 					(tmpp[k] != ',') && (tmpp[k] <= 'a' && tmpp[k] >= 'f') && \
-// 						(tmpp[k] <= 'A' && tmpp[k] >= 'F'))
-// 					return (-1);
-// 				k++;
-// 			}
-// 			if (tmpp[k] && tmpp[k] == '\n')
-// 				break ;
-// 			k++;
-// 		}
-// 		while (++i < (map->col + 1))
-// 		{
-// 			map->map[j][i].z = ft_atoi(tmp[i]);
-// 			map->map[j][i].color = retrieve_color(tmp[i]);
-// 		}
-// 	}
-// 	close(fd);
-// }
-
 void	read_file(char *fname, t_map *map)
 {
 	int	i;
@@ -186,9 +121,7 @@ void	read_file(char *fname, t_map *map)
 	i = 0;
 	close(fd);
 	map->lines = get_row(fname);
-	printf("Lines: %d\n", map->lines);
 	map->col = get_col(fname, map->lines);
-	printf("Cols: %d\n", map->col);
 	if (map->col == 0 || map->lines == 0)
 		panic("FdF: Nothing in file.\n");
 	map->map = (t_pif **)ft_calloc(sizeof(t_pif **), map->lines);

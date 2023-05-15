@@ -6,11 +6,11 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:25:58 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 14:56:01 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:37:58 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "../inc/utils_bonus.h"
 
 static int	ft_count_words(char const *s, char c)
 {

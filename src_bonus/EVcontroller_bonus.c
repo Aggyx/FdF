@@ -6,11 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:35:43 by smagniny          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/09 16:13:31 by smagniny         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/05 17:40:05 by smagniny         ###   ########.fr       */
->>>>>>> df60e2b5d723fef3e5da23361a4fbfaf1523e823
+/*   Updated: 2023/05/15 16:41:07 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +43,7 @@ static	int	handle_input(int keypress, t_mlx *mlx)
 		mlx->map.zoom += 1;
 	else if ((keypress == 110 && mlx->map.zoom > 1) || \
 		(keypress == 45 && mlx->map.zoom > 1))
-<<<<<<< HEAD
 		mlx->map.zoom -= 1;
-=======
-		mlx->map.zoom -= 0.1;
->>>>>>> df60e2b5d723fef3e5da23361a4fbfaf1523e823
 	else if (keypress == 65362 || keypress == 126)
 		mlx->map.mv.yaxis -= 5;
 	else if (keypress == 65364 || keypress == 125)
@@ -67,8 +59,6 @@ static	int	handle_input(int keypress, t_mlx *mlx)
 	else
 		printf("Keypress:%d\n", keypress);
 	blscr(mlx);
-	drawrect(mlx);
-	rendermap(mlx);
 	return (0);
 }
 

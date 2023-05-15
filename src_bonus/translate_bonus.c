@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:19:05 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/05 15:55:01 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:37:08 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_point	*zoomproj(t_point *p, t_map *map)
 	p1->z = p->z * map->zoom;
 	p1->color = p->color;
 	rotate(p1);
-	p1->y -= p->z * map->mv.zaxis;
-	p1->x += ((IMG_W) / 2) - ((map->col * map->zoom) / 2);
-	p1->y += ((IMG_H) / 2) - ((map->lines * map->zoom) / 2);
+	p1->y -= (p->z * map->mv.zaxis);
+	p1->x += (((IMG_W) / 2) - (map->max_x - map->lowest_x / 2));
+	p1->y += (((IMG_H) / 2) - (map->max_y - map->lowest_y / 2));
 	p1->x += map->mv.xaxis;
 	p1->y += map->mv.yaxis;
 	return (p1);

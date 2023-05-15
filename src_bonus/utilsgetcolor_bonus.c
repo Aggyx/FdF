@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 12:39:31 by vbrazhni          #+#    #+#             */
-/*   Updated: 2023/05/05 15:57:21 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:04:25 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 #include "../inc/utils_bonus.h"
 
-/*
-** Check is this char present in selected numeral system
-*/
 static int	ft_isdigit_base(char c, int base)
 {
 	const char	*digits = "0123456789ABCDEF";
@@ -35,10 +32,6 @@ static int	ft_isdigit_base(char c, int base)
 	}
 	return (-1);
 }
-
-/*
-** Check is this string contain prefix of its numeral system
-*/
 
 static t_bool	ft_has_prefix(const char *str, int base)
 {
@@ -59,11 +52,7 @@ static t_bool	ft_has_prefix(const char *str, int base)
 	return (False);
 }
 
-/*
-** Check is this string a number according to the selected numeral system
-*/
-
-t_bool	ft_isnumber(char *str, int base)
+static	t_bool	ft_isnumber(char *str, int base)
 {
 	size_t		i;
 	size_t		digits;
@@ -86,11 +75,7 @@ t_bool	ft_isnumber(char *str, int base)
 	return (False);
 }
 
-/*
-** Convert string to number according to the selected numeral system
-*/
-
-int	ft_atoi_base(const char *str, int base)
+static	int	ft_atoi_base(const char *str, int base)
 {
 	unsigned long	result;
 	size_t			i;
@@ -115,4 +100,25 @@ int	ft_atoi_base(const char *str, int base)
 	while (ft_isdigit_base(str[i], base) >= 0)
 		result = result * base + ft_isdigit_base(str[i++], base);
 	return ((int)(result * sign));
+}
+
+int	retrieve_color(char *tmp)
+{
+	char	**parts;
+	int		res;
+
+	parts = ssplit(tmp, ',');
+	if (ft_len(parts) <= 1)
+	{
+		doublefree(parts);
+		return (0xFFFFFF);
+	}
+	else if (parts[1] && !ft_isnumber(parts[1], 16))
+	{
+		doublefree(parts);
+		return (0xFFFFFF);
+	}
+	res = ft_atoi_base(parts[1], 16);
+	doublefree(parts);
+	return (res);
 }

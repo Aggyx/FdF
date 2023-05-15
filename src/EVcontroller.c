@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:35:43 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/11 19:01:07 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:03:30 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static	int	handle_input(int keypress, t_mlx *mlx)
 	if (keypress == 53)
 		laferme(mlx);
 	blscr(mlx);
-	rendermap(mlx);
 	return (0);
 }
 
