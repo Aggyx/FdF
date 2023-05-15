@@ -6,11 +6,17 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:29:06 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 16:04:16 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:44:52 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/utils_bonus.h"
+
+void	panic(char *str)
+{
+	ft_putendl_fd(str, 2);
+	exit(0);
+}
 
 void	my_mlx_pixel_putcolor(t_img *img, t_point *p)
 {

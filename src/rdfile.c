@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 15:28:51 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:32:43 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static	void	load(char *fname, t_map *map)
 		free(tmpp);
 		if (!tmp)
 			panic("FdF: Could not allocate memory.\n");
-		while (++i < (map->col + 1))
+		while (++i < (map->col))
 		{
 			map->map[j][i].z = ft_atoi(tmp[i]);
 			map->map[j][i].color = retrieve_color(tmp[i]);

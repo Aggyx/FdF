@@ -6,7 +6,7 @@
 #    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/05/15 13:46:10 by smagniny         ###   ########.fr        #
+#    Updated: 2023/05/15 18:11:14 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,16 +21,15 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 DEBUG = -g
 SRC_FILES = src/main.c \
-	src/mlxplus.c src/init.c src/rdfile.c src/utils.c src/translate.c src/screenint.c src/EVcontroller.c \
-	src/utilsgetcolor.c src/ft_split.c
+	src/mlxplus.c src/init.c src/rdfile.c src/translate.c src/screenint.c src/EVcontroller.c \
+	src/utilsgetcolor.c
 
 OBJS = $(SRC_FILES:%.c=%.o)
 
 SRCBONUS_FILES = src_bonus/main_bonus.c \
-	src_bonus/mlxplus_bonus.c src_bonus/init_bonus.c src_bonus/rdfile_bonus.c src_bonus/utils_bonus.c src_bonus/translate_bonus.c src_bonus/screenint_bonus.c src_bonus/EVcontroller_bonus.c \
+	src_bonus/mlxplus_bonus.c src_bonus/init_bonus.c src_bonus/rdfile_bonus.c src_bonus/translate_bonus.c src_bonus/screenint_bonus.c src_bonus/EVcontroller_bonus.c \
 	src_bonus/utilsgetcolor_bonus.c \
 	src_bonus/drawrect_bonus.c \
-	src_bonus/ft_split.c
 
 OBJS_BONUS = $(SRCBONUS_FILES:%.c=%.o)
 

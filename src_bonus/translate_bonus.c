@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:19:05 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 16:37:08 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/15 18:26:56 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ t_point	*zoomproj(t_point *p, t_map *map)
 {	
 	t_point	*p1;
 
-	p1 = ft_calloc(sizeof(t_point), 1);
+	p1 = (t_point *)malloc(sizeof(t_point) * 1);
+	if (p1 == NULL)
+		panic("FdF: Malloc Error");
 	p1->x = p->x * map->zoom;
 	p1->y = p->y * map->zoom;
 	p1->z = p->z * map->zoom;
