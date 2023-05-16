@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:24:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 16:06:13 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:10:30 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
@@ -104,10 +104,5 @@ int		laferme(t_mlx *mlx);
 void	evcontroller(t_mlx *mlx);
 int		retrieve_color(char *tmp);
 //auxiliaries
-int		ft_len(char **tmp);
-int		my_abs(int x);
-int		maxx(int a, int b);
-char	**ssplit(char const *s, char c);
-void	doublefree(char	**tmp);
 void	panic(char *str);
 #endif

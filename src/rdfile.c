@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdfile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 18:32:43 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:51:32 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 static int	get_col_norm(int f)
 {
-	char	*raw;
+	char	*r;
 	int		col;
 	int		i;
 
 	i = 0;
 	col = 0;
-	raw = get_next_line(f);
-	while (raw[i] && raw[i] != '\n')
+	r = get_next_line(f);
+	while (r[i] && r[i] != '\n')
 	{
-		while (raw[i] && raw[i] == ' ' && raw[i] != '\n')
+		while (r[i] && r[i] == ' ' && r[i] != '\n')
 			i++;
-		while (raw[i] && raw[i] != ' ' && raw[i] != '\n')
+		while (r[i] && r[i] != ' ' && r[i] != '\n')
 		{
-			if ((raw[i] <= 0 || raw[i] >= 9) && \
-				(raw[i] != ',') && (raw[i] <= 'a' && raw[i] >= 'f') && \
-					(raw[i] <= 'A' && raw[i] >= 'F'))
+			if ((r[i] <= 0 || r[i] >= 9) && (r[i] != ',') && \
+				(r[i] <= 'a' && r[i] >= 'f') && (r[i] <= 'A' && r[i] >= 'F'))
 				return (-1);
 			i++;
 		}
-		if (raw[i] && raw[i] == '\n')
+		if (r[i] && r[i] == '\n')
 			break ;
 		col++;
 		i++;
 	}
+	free(r);
 	return (col);
 }
 

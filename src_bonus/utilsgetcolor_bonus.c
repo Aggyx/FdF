@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsgetcolor_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 12:39:31 by vbrazhni          #+#    #+#             */
-/*   Updated: 2023/05/15 17:47:33 by smagniny         ###   ########.fr       */
+/*   Created: 2018/08/09 12:39:31 by smagniny          #+#    #+#             */
+/*   Updated: 2023/05/16 12:08:05 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
