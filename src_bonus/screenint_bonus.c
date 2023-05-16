@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:29:06 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 17:44:52 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:03:36 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ void	rendermap(t_mlx *mlx)
 	while (++r < mlx->map.lines)
 	{
 		c = -1;
-		while (++c < mlx->map.col)
+		while (++c < mlx->map.col + 1)
 		{
-			if (c < mlx->map.col - 1)
+			if (c < mlx->map.col)
 				bresenham(zoomproj(&mlx->map.mapcor[r][c], &mlx->map), \
-				zoomproj(&mlx->map.mapcor[r][(c + 1)], &mlx->map), \
-				&mlx->map.img);
+							zoomproj(&mlx->map.mapcor[r][(c + 1)], &mlx->map), \
+							&mlx->map.img);
 			if (r < mlx->map.lines - 1)
 				bresenham(zoomproj(&mlx->map.mapcor[r][c], &mlx->map), \
-				zoomproj(&mlx->map.mapcor[(r + 1)][c], &mlx->map), \
-				&mlx->map.img);
+							zoomproj(&mlx->map.mapcor[(r + 1)][c], &mlx->map), \
+							&mlx->map.img);
 		}
 	}
 }

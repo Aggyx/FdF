@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:18:36 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 16:47:05 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:03:06 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static	void	resize(t_map *map)
 	map->max_y = map->mapcor[map->lines - 1][map->col].y;
 	map->lowest_y = map->mapcor[0][0].y;
 	dx = map->max_x - map->lowest_x;
-	while (((float)dx / (float)(IMG_W - 20)) < 1)
+	while (((float)dx / (float)(IMG_W - 20)) < 2)
 	{
 		dx *= z;
 		z++;
@@ -57,7 +57,6 @@ void	create_coords(t_map *map)
 
 	i = -1;
 	c = -1;
-	map->lowest_y = INT_MAX;
 	map->mapcor = (t_point **)ft_calloc(sizeof(t_point *), map->lines);
 	if (map->mapcor == NULL)
 		panic("Error: ft_calloc mapcor");
@@ -66,7 +65,7 @@ void	create_coords(t_map *map)
 		map->mapcor[i] = (t_point *)ft_calloc(sizeof(t_point), map->col + 1);
 		if (map->mapcor[i] == NULL)
 			panic("Error; ft_calloc mapcor[i]");
-		while (++c < map->col + 1)
+		while (++c <= map->col)
 		{
 			init_point(&map->mapcor[i][c], c, i, map->map[i][c].z);
 			map->mapcor[i][c].color = map->map[i][c].color;

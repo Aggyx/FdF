@@ -3,38 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   translate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:19:05 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 12:35:26 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 13:22:58 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/utils.h"
 
-static	void	rotate(t_point *p)
-{
-	p->x = (p->x - p->y) * cos(0.523599);
-	p->y = ((p->x + p->y) * sin(0.523599)) - p->z;
-}
-/*
-static void rotate(t_point* p)
+// static	void	rotate(t_point *p)
+// {
+// 	p->x = (p->x - p->y) * cos(0.523599);
+// 	p->y = ((p->x + p->y) * sin(0.523599)) - p->z;
+// }
+
+static void	rotate(t_point *p)
 {
     // Convert angles to radians
     double azimuth = 35.264 * M_PI / 180.0;
     double inclination = 45.0 * M_PI / 180.0;
 
-    // Store initial coordinates
     int x = p->x;
     int y = p->y;
     int z = p->z;
-
-    // Perform rotation in 3D space
+	
     p->x = (int)((x * cos(azimuth) - y * cos(inclination) * sin(azimuth)) + 0.5);
-    p->y = (int((x * sin(azimuth) + y * cos(inclination) * cos(azimuth) - z * sin(inclination)) + 0.5);
+    p->y = (int)((x * sin(azimuth) + y * cos(inclination) * cos(azimuth) - z * sin(inclination)) + 0.5);
     p->z = (int)((y * sin(inclination) + z * cos(inclination)) + 0.5);
 }
-*/
+
 t_point	*zoomproj(t_point *p, t_map *map)
 {	
 	t_point	*p1;

@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:36:01 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 16:43:04 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:21:04 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,9 @@ int	init(t_mlx *mlx, t_img	*img, t_map *map)
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, \
 		&img->line_len, &img->endian);
 	map->zoom = 1;
+	map->lowest_x = INT_MAX;
+	map->lowest_y = INT_MAX;
+	map->max_x = INT_MIN;
+	map->max_y = INT_MIN;
 	return (1);
 }

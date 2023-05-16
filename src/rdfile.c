@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdfile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 11:51:32 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:02:52 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static	void	load(char *fname, t_map *map)
 		free(tmpp);
 		if (!tmp)
 			panic("FdF: Could not allocate memory.\n");
-		while (++i < (map->col))
+		while (++i <= map->col)
 		{
 			map->map[j][i].z = ft_atoi(tmp[i]);
 			map->map[j][i].color = retrieve_color(tmp[i]);
@@ -125,7 +125,7 @@ void	read_file(char *fname, t_map *map)
 	if (map->col == 0 || map->lines == 0)
 		panic("FdF: Nothing in file.\n");
 	map->map = (t_pif **)ft_calloc(sizeof(t_pif **), map->lines);
-	if (!map->map)
+	if (map->map == NULL)
 		panic("FdF: Could not allocate memory for map.");
 	while (i < map->lines)
 	{	

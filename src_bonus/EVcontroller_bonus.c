@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:35:43 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 16:41:07 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:30:00 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	blscr(t_mlx *mlx)
 		{
 			p = mlx->map.img.addr + \
 				(i * mlx->map.img.line_len + j * (mlx->map.img.bpp / 8));
-			*(unsigned int *)p = 0x00000000;
+			*(unsigned int *)p = 0x000000;
 			j++;
 		}
 		i++;
@@ -56,6 +56,10 @@ static	int	handle_input(int keypress, t_mlx *mlx)
 		mlx->map.mv.zaxis += 1;
 	else if (keypress == 107 || keypress == 40)
 		mlx->map.mv.zaxis -= 1;
+	else if (keypress == 15)
+		mlx->map.mv.project = 1;
+	else if (keypress == 34)
+		mlx->map.mv.project = 0;
 	else
 		printf("Keypress:%d\n", keypress);
 	blscr(mlx);

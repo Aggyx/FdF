@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utilsgetcolor_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 12:39:31 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 12:08:05 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:46:46 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int	retrieve_color(char *tmp)
 		doublefree(parts);
 		return (0xFFFFFF);
 	}
-	else if (parts[1] && !ft_isnumber(parts[1], 16))
+	else if (!ft_isnumber(parts[1], 16))
 	{
 		doublefree(parts);
 		return (0xFFFFFF);
 	}
-	res = ft_atoi_base(parts[1], 16);
+	res = ft_atoi_base(parts[1] + 2, 16);
 	doublefree(parts);
 	return (res);
 }

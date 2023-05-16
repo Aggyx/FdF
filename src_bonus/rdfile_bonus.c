@@ -6,38 +6,38 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:44:35 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/15 16:47:40 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 19:03:52 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/utils.h"
+#include "../inc/utils_bonus.h"
 
 static int	get_col_norm(int f)
 {
-	char	*raw;
+	char	*r;
 	int		col;
 	int		i;
 
 	i = 0;
 	col = 0;
-	raw = get_next_line(f);
-	while (raw[i] && raw[i] != '\n')
+	r = get_next_line(f);
+	while (r[i] && r[i] != '\n')
 	{
-		while (raw[i] && raw[i] == ' ' && raw[i] != '\n')
+		while (r[i] && r[i] == ' ' && r[i] != '\n')
 			i++;
-		while (raw[i] && raw[i] != ' ' && raw[i] != '\n')
+		while (r[i] && r[i] != ' ' && r[i] != '\n')
 		{
-			if ((raw[i] <= 0 || raw[i] >= 9) && (raw[i] != ',') && \
-				(raw[i] != 'x') && (raw[i] <= 'a' && raw[i] >= 'f') && \
-				(raw[i] <= 'A' && raw[i] >= 'F'))
-				panic("FdF: Invalid map");
+			if ((r[i] <= 0 || r[i] >= 9) && (r[i] != ',') && \
+				(r[i] <= 'a' && r[i] >= 'f') && (r[i] <= 'A' && r[i] >= 'F'))
+				return (-1);
 			i++;
 		}
-		if (raw[i] && raw[i] == '\n')
+		if (r[i] && r[i] == '\n')
 			break ;
 		col++;
 		i++;
 	}
+	free(r);
 	return (col);
 }
 
@@ -102,7 +102,7 @@ static	void	load(char *fname, t_map *map)
 		free(tmpp);
 		if (!tmp)
 			panic("FdF: Could not allocate memory.\n");
-		while (++i < (map->col))
+		while (++i <= map->col)
 		{
 			map->map[j][i].z = ft_atoi(tmp[i]);
 			map->map[j][i].color = retrieve_color(tmp[i]);
@@ -128,9 +128,9 @@ void	read_file(char *fname, t_map *map)
 	if (map->map == NULL)
 		panic("FdF: Could not allocate memory for map.");
 	while (i < map->lines)
-	{
+	{	
 		map->map[i] = (t_pif *)ft_calloc(sizeof(t_pif *), map->col + 1);
-		if (map->map[i] == NULL)
+		if (!map->map[i])
 			panic("FdF: Could not allocate memory for map.");
 		i++;
 	}
