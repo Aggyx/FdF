@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
+#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/05/15 18:11:14 by smagniny         ###   ########.fr        #
+#    Updated: 2023/05/16 22:54:40 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,11 +42,11 @@ OS := $(shell uname)
 
 ifeq ($(OS),Linux)
     INC := -I./inc/
-    LFLAGS := -lX11 -lXext
+    LFLAGS := -lX11 -lXext -lm
     LIBS := ./inc/libft/libft.a ./inc/mlx/libmlx_Linux.a
 else ifeq ($(OS),Darwin)
 	INC := -Imlx
-	LFLAGS := -lmlx -framework OpenGL -framework AppKit
+	LFLAGS := -lmlx -lm -framework OpenGL -framework AppKit
 	LIBS := ./inc/libft/libft.a
 endif
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlxplus.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:18:36 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 19:03:06 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:35:19 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	init_point(t_point *point, int x, int y, int z)
 static	void	resize(t_map *map)
 {
 	int		z;
-	int		dx;
+	float	dx;
+	float	dy;
 
 	z = 1;
 	map->max_x = map->mapcor[0][map->col].x;
@@ -42,12 +43,16 @@ static	void	resize(t_map *map)
 	map->max_y = map->mapcor[map->lines - 1][map->col].y;
 	map->lowest_y = map->mapcor[0][0].y;
 	dx = map->max_x - map->lowest_x;
-	while (((float)dx / (float)(IMG_W - 20)) < 2)
+	dy = map->max_y - map->lowest_y;
+	printf("X difference: %f", dx);
+	while (((dx / dy) / ((float)(IMG_W - 20) / (float)(IMG_H - 20))) < 1)
 	{
 		dx *= z;
+		dy *= z;
 		z++;
 	}
 	map->zoom = z;
+	printf("zoom: %d", z);
 }
 
 void	create_coords(t_map *map)

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:24:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 18:42:49 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:51:55 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_BONUS_H
 # define UTILS_BONUS_H
 //"mlx/mlx.h"
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <math.h>

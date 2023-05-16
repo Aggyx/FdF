@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:36:01 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 17:03:51 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:48:34 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ int	openfd(char *fname)
 	if (f == -1)
 		panic("FdF: Invalid file\n");
 	return (f);
+}
+
+static void	init_norm(t_map *map)
+{
+	map->zoom = 1;
+	map->mv.xaxis = 0;
+	map->mv.yaxis = 0;
+	map->mv.zaxis = 1;
+	map->mv.project = 0;
+	map->lowest_x = INT_MAX;
+	map->lowest_y = INT_MAX;
+	map->max_x = INT_MIN;
+	map->max_y = INT_MIN;
 }
 
 int	init(t_mlx *mlx, t_img	*img, t_map *map)
@@ -43,14 +56,6 @@ int	init(t_mlx *mlx, t_img	*img, t_map *map)
 	}
 	img->addr = mlx_get_data_addr(img->img, &img->bpp, \
 		&img->line_len, &img->endian);
-	map->zoom = 1;
-	map->mv.xaxis = 0;
-	map->mv.yaxis = 0;
-	map->mv.zaxis = 1;
-	map->mv.project = 0;
-	map->lowest_x = INT_MAX;
-	map->lowest_y = INT_MAX;
-	map->max_x = INT_MIN;
-	map->max_y = INT_MIN;
+	init_norm(map);
 	return (1);
 }

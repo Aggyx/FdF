@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:19:05 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 19:26:27 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:54:11 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	iso(t_point *p)
 	y = p->y;
 	z = p->z;
 	p->x = (int)((x * cos(vg) - y * cos(hg) * sin(vg)) + 0.5);
-    p->y = (int)((x * sin(vg) + y * cos(hg) * cos(vg) - z * sin(hg)) + 0.5);
-    p->z = (int)((y * sin(hg) + z * cos(hg)) + 0.5);
+	p->y = (int)((x * sin(vg) + y * cos(hg) * cos(vg) - z * sin(hg)) + 0.5);
+	p->z = (int)((y * sin(hg) + z * cos(hg)) + 0.5);
 }
 
 t_point	*zoomproj(t_point *p, t_map *map)

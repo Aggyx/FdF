@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   EVcontroller_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:35:43 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 19:30:00 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/16 22:43:37 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	blscr(t_mlx *mlx)
 	}
 }
 
-static	int	handle_input(int keypress, t_mlx *mlx)
+static void	handle_input_norm(int keypress, t_mlx *mlx)
 {
 	if (keypress == 53)
 		laferme(mlx);
@@ -62,6 +62,11 @@ static	int	handle_input(int keypress, t_mlx *mlx)
 		mlx->map.mv.project = 0;
 	else
 		printf("Keypress:%d\n", keypress);
+}
+
+static	int	handle_input(int keypress, t_mlx *mlx)
+{
+	handle_input_norm(keypress, mlx);
 	blscr(mlx);
 	return (0);
 }
