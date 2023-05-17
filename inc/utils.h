@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:24:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 22:36:13 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:20:36 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-
-# include "mlx/mlx.h"
+//"mlx/mlx.h"
+# include <mlx.h>
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
@@ -98,6 +98,7 @@ void	create_coords(t_map *map);
 t_point	*zoomproj(t_point *p, t_map *map);
 void	bresenham(t_point *p, t_point *p1, t_img	*img);
 void	rendermap(t_mlx *mlx);
+void	resize(t_map *map);
 void	blscr(t_mlx *mlx);
 void	my_mlx_pixel_putcolor(t_img *img, t_point *p);
 int		laferme(t_mlx *mlx);

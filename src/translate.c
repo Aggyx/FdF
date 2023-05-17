@@ -3,14 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   translate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:19:05 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 23:13:20 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:24:59 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/utils.h"
+
+static int	resize_norm(t_map *map, int dx, int dy, int z)
+{
+	int	tmp;
+
+	tmp = dx;
+	printf("X difference: %d\n", dx);
+	while (((float)dx / (float)(IMG_W - 20)) < 0.3)
+	{
+		dx = tmp;
+		z++;
+		dx *= z;
+	}
+	printf("	zoom final for window dx: %d\n", z);
+	map->zoom = z;
+	tmp = dy;
+	z = 1;
+	printf("Y difference: %d\n", dy);
+	while (((float)dy / (float)(IMG_H - 20)) < 0.3)
+	{
+		dy = tmp;
+		z++;
+		dy *= z;
+	}
+	printf("	zoom final for window dy: %d\n", z);
+	return (fmin(map->zoom, z));
+}
+
+void	resize(t_map *map)
+{
+	int		z;
+	int		dx;
+	int		dy;
+
+	z = 1;
+	map->max_x = map->mapcor[0][map->col].x;
+	map->lowest_x = map->mapcor[map->lines - 1][0].x;
+	map->max_y = map->mapcor[map->lines - 1][map->col].y;
+	map->lowest_y = map->mapcor[0][0].y;
+	dx = map->max_x - map->lowest_x;
+	dy = map->max_y - map->lowest_y;
+	printf("-----resize-----\n");
+	map->zoom = resize_norm(map, dx, dy, z);
+	printf("ZOOM; %d\n", map->zoom);
+}
 
 static void	iso(t_point *p)
 {
