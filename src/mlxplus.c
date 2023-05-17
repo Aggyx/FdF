@@ -6,7 +6,7 @@
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:18:36 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 23:35:19 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:39:02 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ static void	init_point(t_point *point, int x, int y, int z)
 static	void	resize(t_map *map)
 {
 	int		z;
-	float	dx;
-	float	dy;
+	int		dx;
+	int		dy;
+	int		tmp;
 
 	z = 1;
 	map->max_x = map->mapcor[0][map->col].x;
@@ -44,15 +45,29 @@ static	void	resize(t_map *map)
 	map->lowest_y = map->mapcor[0][0].y;
 	dx = map->max_x - map->lowest_x;
 	dy = map->max_y - map->lowest_y;
-	printf("X difference: %f", dx);
-	while (((dx / dy) / ((float)(IMG_W - 20) / (float)(IMG_H - 20))) < 1)
+	tmp = dx;
+	printf("-----resize-----\n");
+	printf("X difference: %d\n", dx);
+	while (((float)dx / (float)(IMG_W - 20)) < 0.3)
 	{
-		dx *= z;
-		dy *= z;
+		dx = tmp;
 		z++;
+		dx *= z;
 	}
+	printf("	zoom final for window dx: %d\n", z);
 	map->zoom = z;
-	printf("zoom: %d", z);
+	tmp = dy;
+	z = 1;
+	printf("Y difference: %d\n", dy);
+	while (((float)dy / (float)(IMG_H - 20)) < 0.3)
+	{
+		dy = tmp;
+		z++;
+		dy *= z;
+	}
+	printf("	zoom final for window dy: %d\n", z);
+	map->zoom = fmin(map->zoom, z);
+	printf("ZOOM; %d\n", map->zoom);
 }
 
 void	create_coords(t_map *map)
