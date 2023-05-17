@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 22:19:05 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/17 14:25:32 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:38:54 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static	void	rotate(t_point *p)
 	p->y = ((p->x + p->y) * sin(0.523599));
 }
 
-static void	iso(t_point *p)
+static void	iso(t_point *p, t_map *map)
 {
 	double	vg;
 	double	hg;
@@ -77,8 +77,9 @@ static void	iso(t_point *p)
 	y = p->y;
 	z = p->z;
 	p->x = (int)((x * cos(vg) - y * cos(hg) * sin(vg)) + 0.5);
-	p->y = (int)((x * sin(vg) + y * cos(hg) * cos(vg) - z * sin(hg)) + 0.5);
-	p->z = (int)((y * sin(hg) + z * cos(hg)) + 0.5);
+	p->y = (int)((x * sin(vg) + y * cos(hg) * cos(vg) \
+		- (z * map->mv.zaxis) * sin(hg)) + 0.5);
+	p->z = (int)((y * sin(hg) + (z * map->mv.zaxis) * cos(hg)) + 0.5);
 }
 
 t_point	*zoomproj(t_point *p, t_map *map)
@@ -93,11 +94,11 @@ t_point	*zoomproj(t_point *p, t_map *map)
 	p1->z = p->z * map->zoom;
 	p1->color = p->color;
 	if (map->mv.project == 0)
-		iso(p1);
+		iso(p1, map);
 	if (map->mv.project == 1)
 	{	
 		rotate(p1);
-		p->y -= p->z * map->mv.zaxis;
+		p1->y -= (int)((float)p1->z * map->mv.zaxis);
 	}
 	p1->x += (((IMG_W) / 2) - (map->max_x - map->lowest_x / 2));
 	p1->y += (((IMG_H) / 2) - (map->max_y - map->lowest_y / 2));

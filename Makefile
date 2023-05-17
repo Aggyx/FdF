@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
+#    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 14:15:12 by smagniny          #+#    #+#              #
-#    Updated: 2023/05/16 22:54:40 by smagniny         ###   ########.fr        #
+#    Updated: 2023/05/17 14:52:34 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CYAN        = \033[1;36m
 NAME = FdF
 NAMEB = FdF_bonus
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra
 DEBUG = -g
 SRC_FILES = src/main.c \
 	src/mlxplus.c src/init.c src/rdfile.c src/translate.c src/screenint.c src/EVcontroller.c \
@@ -51,48 +51,56 @@ else ifeq ($(OS),Darwin)
 endif
 
 all: $(OBJS)
+	@echo "$(GREEN)Created binary objects"
 	@make -sC $(LIBFT)
-	@echo  "$(GREEN)Creating libraries files$(CYAN)"
+	@echo  "$(GREEN)Creating libraries files"
     ifeq ($(OS),Linux)
 		@make -sC $(MLX)
-		$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) $(LIBS) $(LFLAGS)
+		@ $(CC) $(CFLAGS) $(OBJS)  -o $(NAME) $(LIBS) $(LFLAGS)
     else ifeq ($(OS),Darwin)
-		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS) $(LFLAGS)
+		@ $(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS) $(LFLAGS)
+	@echo "$(GREEN)Compiled succesfully"
     endif
 
 clean:
-	rm -f $(OBJS)
+	@echo "$(CYAN)Supressing binary objects"
+	@rm -f $(OBJS)
 
 fclean: clean free
+	@echo "$(CYAN)Supressing binary executable"
 	@rm -f $(NAME)
 
 re: fclean all
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 free:
-	@echo "$(GREEN)Supressing libraries files$(CYAN)"
+	@echo "$(CYAN)Supressing libraries files"
 	@make fclean -sC $(LIBFT)
 
 bonus: $(OBJS_BONUS)
+	@echo "$(GREEN)Created bonus binary objects"
 	@make -sC $(LIBFT)
-	@echo  "$(GREEN)Creating libraries files$(CYAN)"
+	@echo  "$(GREEN)Creating libraries files"
     ifeq ($(OS),Linux)
 		@make -sC $(MLX)
-		$(CC) $(CFLAGS) $(OBJS_BONUS)  -o $(NAMEB) $(LIBS) $(LFLAGS)
+		@ $(CC) $(CFLAGS) $(OBJS_BONUS)  -o $(NAMEB) $(LIBS) $(LFLAGS)
     else ifeq ($(OS),Darwin)
-		$(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAMEB) $(LIBS) $(LFLAGS)
+		@ $(CC) $(CFLAGS) $(OBJS_BONUS) -o $(NAMEB) $(LIBS) $(LFLAGS)
+	@echo "$(GREEN)Compiled succesfully"
     endif
 
 cleanb:
+	@echo "$(CYAN)Supressing bonus binary objects"
 	rm -f $(OBJS_BONUS)
 
 fcleanb: cleanb free
+	@echo "$(CYAN)Supressing bonus binary executable"
 	@rm -f $(NAME)
 
 freelinux:
-	@echo "$(GREEN)Supressing libraries files$(CYAN)"
+	@echo "$(CYAN)Supressing libraries files"
 	@make fclean -C $(LIBFT)
 	@make fclean -C $(MLX)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   EVcontroller_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:35:43 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/16 22:43:37 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:36:00 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static void	handle_input_norm(int keypress, t_mlx *mlx)
 	else if (keypress == 65361 || keypress == 123)
 		mlx->map.mv.xaxis -= 5;
 	else if (keypress == 108 || keypress == 37)
-		mlx->map.mv.zaxis += 1;
+		mlx->map.mv.zaxis += 0.1;
 	else if (keypress == 107 || keypress == 40)
-		mlx->map.mv.zaxis -= 1;
+		mlx->map.mv.zaxis -= 0.1;
 	else if (keypress == 15)
 		mlx->map.mv.project = 1;
 	else if (keypress == 34)

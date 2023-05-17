@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:24:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/17 14:25:49 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:34:36 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ typedef struct img_struc
 
 typedef struct t_imgmv
 {
-	int	xaxis;
-	int	yaxis;
-	int	zaxis;
-	int	project;
+	int		xaxis;
+	int		yaxis;
+	float	zaxis;
+	int		project;
 }		t_mv;
 
 typedef struct map_struct
