@@ -16,7 +16,7 @@ CYAN        = \033[1;36m
 
 #COMP
 NAME = FdF
-NAMEB = FdF_bonus
+NAMEB = bonus
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 DEBUG = -g
@@ -50,7 +50,10 @@ else ifeq ($(OS),Darwin)
 	LIBS := ./inc/libft/libft.a
 endif
 
-all: $(OBJS)
+all: $(NAME)
+
+
+$(NAME): $(OBJS)
 	@echo "$(GREEN)Created binary objects"
 	@make -sC $(LIBFT)
 	@echo  "$(GREEN)Creating libraries files"
@@ -79,7 +82,7 @@ free:
 	@echo "$(CYAN)Supressing libraries files"
 	@make fclean -sC $(LIBFT)
 
-bonus: $(OBJS_BONUS)
+$(NAMEB): $(OBJS_BONUS)
 	@echo "$(GREEN)Created bonus binary objects"
 	@make -sC $(LIBFT)
 	@echo  "$(GREEN)Creating libraries files"
@@ -97,7 +100,7 @@ cleanb:
 
 fcleanb: cleanb free
 	@echo "$(CYAN)Supressing bonus binary executable"
-	@rm -f $(NAME)
+	@rm -f $(NAMEB)
 
 freelinux:
 	@echo "$(CYAN)Supressing libraries files"
