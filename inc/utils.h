@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:24:30 by smagniny          #+#    #+#             */
-/*   Updated: 2023/05/17 14:20:36 by smagniny         ###   ########.fr       */
+/*   Updated: 2024/04/23 10:21:18 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@
 
 # define IMG_H 540
 # define IMG_W 980
-
-typedef enum t_boolean
-{
-	False,
-	True
-}	t_bool;
 
 typedef struct s_pointinf
 {
